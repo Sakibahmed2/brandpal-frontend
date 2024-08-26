@@ -23,7 +23,7 @@ const Navbar = () => {
   ];
 
   return (
-    <Container className="navbar bg-base-100">
+    <Container className="navbar px-4 mx-auto fixed top-0 left-0 right-0 bg-white">
       <div className="flex w-full justify-between items-center">
         <Link href="/">
           <p className="text-3xl lg:text-4xl font-semibold text-primary">
@@ -46,7 +46,7 @@ const Navbar = () => {
         </div>
 
         {/* Dropdown Menu on the Right for Mobile */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center ">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -67,7 +67,7 @@ const Navbar = () => {
 
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 right-5 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-white/50 backdrop-blur-md rounded-box z-[1] mt-3 right-5 w-52 p-2 shadow "
             >
               {navItems.map((item, index) => (
                 <li key={index}>
