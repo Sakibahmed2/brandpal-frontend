@@ -10,7 +10,7 @@ const ServiceCard = ({ icon, title, description }) => {
   return (
     <div
       className={cn(
-        "w-full max-w-[350px] md:h-[412px] bg-white rounded-2xl duration-300 ease-in-out",
+        "w-full max-w-[350px] md:h-[412px] mx-auto bg-white rounded-2xl duration-300 ease-in-out",
         isHovered ? "shadow-2xl" : "shadow-md"
       )}
       onMouseEnter={() => setIsHovered(true)}

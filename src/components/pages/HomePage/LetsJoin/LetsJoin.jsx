@@ -1,0 +1,35 @@
+import { FileUp, Target, TrendingUp } from "lucide-react";
+import Image from "next/image";
+import React from "react";
+import letsJoinImage from "@/assets/whyChooseUs.png";
+
+const LetsJoin = () => {
+  return (
+    <div className="mt-10 md:mt-32 mb-20">
+      <p className="text-xl text-primary md:hidden flex justify-center mb-3">
+        LET&lsquo;S JOIN
+      </p>
+      <div className="flex flex-col-reverse md:flex-row justify-center items-center w-full ">
+        <div className=" mt-10 md:mt-0">
+          <p className="text-xl text-primary hidden md:flex">
+            LET&lsquo;S JOIN
+          </p>
+          <h3 className="text-2xl md:text-4xl font-semibold mt-4 mb-6">
+            Let&lsquo;s join to make something bigger together
+          </h3>
+          <button className="custom-primary-btn py-4">Get Started</button>
+        </div>
+        <div>
+          <Image
+            src={letsJoinImage}
+            width={500}
+            height={500}
+            alt="why choose us image"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LetsJoin;

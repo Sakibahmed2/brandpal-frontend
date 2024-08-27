@@ -23,7 +23,7 @@ const Navbar = () => {
   ];
 
   return (
-    <Container className="navbar px-4 mx-auto fixed top-0 left-0 right-0 bg-white">
+    <Container className="navbar px-4 mx-auto fixed top-0 left-0 right-0 bg-white z-50">
       <div className="flex w-full justify-between items-center">
         <Link href="/">
           <p className="text-3xl lg:text-4xl font-semibold text-primary">
