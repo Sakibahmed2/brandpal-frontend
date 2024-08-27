@@ -5,7 +5,7 @@ import React from "react";
 
 const WhatWeDo = () => {
   return (
-    <div className="mt-40 mb-20">
+    <div className="mt-40">
       <div className="text-center">
         <SectionTitle
           title={"WHAT WE DO?"}
@@ -13,7 +13,7 @@ const WhatWeDo = () => {
         />
       </div>
 
-      <div className="mt-28 md:flex justify-center items-center gap-5 space-y-10 md:space-y-0">
+      <div className="mt-10 md:mt-28 md:flex justify-center items-center gap-5 space-y-10 md:space-y-0">
         <ServiceCard
           title={"Content Writing"}
           description={"Create interesting and innovative content"}

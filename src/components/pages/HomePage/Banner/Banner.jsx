@@ -10,7 +10,7 @@ const Banner = () => {
           <h1 className="text-3xl md:text-5xl lg:text-6xl w-[250px] md:w-full font-semibold">
             The next level marketing digital{" "}
           </h1>
-          <p className="md:text-xl text-gray-500 mt-6 mb-7 md:mb-9 w-full max-w-[500px]">
+          <p className="md:text-xl text-gray-400 mt-6 mb-7 md:mb-9 w-full max-w-[500px]">
             Make your marketing something show off. And effective strategies
             your need and branding goal
           </p>
