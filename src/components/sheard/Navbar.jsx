@@ -74,16 +74,18 @@ const Navbar = () => {
                   <Link href={item.path}>{item.title}</Link>
                 </li>
               ))}
-              <div className="navbar-end">
+              <div className="navbar-end flex flex-col gap-2">
                 <button className="custom-primary-btn">Sign in</button>
+                <button className="custom-secondary-btn">Login</button>
               </div>
             </ul>
           </div>
         </div>
 
         {/* Sign in Button for Larger Screens */}
-        <div className="hidden md:flex">
+        <div className="hidden md:flex gap-2">
           <button className="custom-primary-btn">Sign in</button>
+          <button className="custom-secondary-btn">Login</button>
         </div>
       </div>
     </Container>
