@@ -1,4 +1,5 @@
-import Navbar from "@/components/sheard/Navbar";
+import Footer from "@/components/shared/Footer/Footer";
+import Navbar from "@/components/shared/Navbar/Navbar";
 import React from "react";
 
 const CommonLayout = ({ children }) => {
@@ -6,6 +7,7 @@ const CommonLayout = ({ children }) => {
     <div>
       <Navbar />
       {children}
+      <Footer />
     </div>
   );
 };

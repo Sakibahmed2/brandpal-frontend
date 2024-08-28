@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const WhyChooseUs = () => {
   return (
-    <div className="mt-32">
+    <div className="mt-32 ">
       <p className="text-xl text-primary md:hidden flex justify-center ice">
         WHY CHOOSE US?
       </p>
-      <div className="md:flex justify-between items-center w-full ">
-        <div className="md:w-[680px]">
+      <div className="md:flex justify-between items-center w-full mx-auto">
+        <div className="lg:w-[680px] mx-auto">
           <Image
             src={chooseUsImg}
             width={500}
@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
             alt="why choose us image"
           />
         </div>
-        <div className="md:w-[451px] mt-10 md:mt-0">
+        <div className="lg:w-[451px] mx-auto mt-10 md:mt-0">
           <p className="text-xl text-primary hidden md:flex">WHY CHOOSE US?</p>
           <h3 className="text-2xl md:text-4xl font-semibold">
             We Serve Your Digital Objective Better{" "}

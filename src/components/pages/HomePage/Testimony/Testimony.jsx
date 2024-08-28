@@ -10,7 +10,7 @@ const Testimony = () => {
       <p className="text-xl text-primary md:hidden flex justify-center ice">
         TESTIMONY
       </p>
-      <div className="md:flex justify-between w-full ">
+      <div className="md:flex justify-between items-center w-full ">
         <div className="md:w-[720px]">
           <Image
             src={testimonialImg}
@@ -19,7 +19,7 @@ const Testimony = () => {
             alt="why choose us image"
           />
         </div>
-        <div className="md:w-[351px] mt-10 md:mt-0">
+        <div className="md:w-[351px] mt-10 md:mt-0 ml-4">
           <p className="text-xl text-primary hidden md:flex">TESTIMONY</p>
           <h3 className="text-2xl md:text-4xl font-semibold">
             Our client get a result
@@ -27,7 +27,7 @@ const Testimony = () => {
 
           {/* Client reviews */}
           <div className="mt-8  gap-10 relative">
-            <div className="absolute left-64 md:-left-20">
+            <div className="absolute left-64 top-5 md:-left-20">
               <Image
                 src={userImg}
                 width={60}

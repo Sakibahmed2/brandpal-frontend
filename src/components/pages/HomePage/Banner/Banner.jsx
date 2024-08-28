@@ -14,7 +14,7 @@ const Banner = () => {
             Make your marketing something show off. And effective strategies
             your need and branding goal
           </p>
-          <div className="flex flex-col md:flex-row gap-2 md:gap-8 w-1/2">
+          <div className="flex flex-col md:flex-row gap-2 lg:gap-6 w-1/2 lg:w-full">
             <button className="custom-secondary-btn py-3 md:py-5">
               Get Started
             </button>

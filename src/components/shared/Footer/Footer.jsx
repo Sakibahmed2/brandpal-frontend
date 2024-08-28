@@ -1,0 +1,82 @@
+import Container from "@/components/ui/Container";
+import { Facebook, Instagram, Twitter } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+
+const Footer = () => {
+  return (
+    <div className="bg-[#FDFCFF] py-10">
+      <Container>
+        <div className="md:flex justify-between ">
+          <div>
+            <Link href="/">
+              <p className="text-3xl lg:text-4xl font-semibold text-primary">
+                BRAND<span className="text-secondary">PAL</span>
+              </p>
+            </Link>
+            <p className="text-gray-400 mt-5 mb-10 md:mb-20 w-full max-w-[200px]">
+              Make Strategies Marketing and make branding hype
+            </p>
+            <div className="hidden  md:flex gap-10 items-center text-primary">
+              <p>
+                <Facebook />
+              </p>
+              <p>
+                <Twitter />
+              </p>
+              <p>
+                <Instagram />
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3">
+            <div>
+              <p className="text-xl text-secondary font-semibold">
+                Why Marketek
+              </p>
+              <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
+                <p>Our Product</p>
+                <p>Our Testimony</p>
+                <p>Find Marketing</p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xl text-secondary font-semibold">Support</p>
+              <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
+                <p>About us</p>
+                <p>FAQ</p>
+                <p>Help</p>
+                <p>Privacy and Policy</p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xl text-secondary font-semibold">Contact Us</p>
+              <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
+                <p>marketek@gmail.com</p>
+                <p>+62 1234 8765 223</p>
+                <p>2301 Jl. Suku saki, Cijalingan 6666</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex md:hidden gap-10 items-center justify-end mt-5 text-primary">
+            <p>
+              <Facebook />
+            </p>
+            <p>
+              <Twitter />
+            </p>
+            <p>
+              <Instagram />
+            </p>
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+};
+
+export default Footer;

@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "../ui/Container";
+import Container from "../../ui/Container";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
         </Link>
 
         {/* Navbar for larger screens */}
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex">
           <ul className="menu-horizontal space-x-16 px-1">
             {navItems.map((item, index) => (
               <li
@@ -46,7 +46,7 @@ const Navbar = () => {
         </div>
 
         {/* Dropdown Menu on the Right for Mobile */}
-        <div className="md:hidden flex items-center ">
+        <div className="lg:hidden flex items-center ">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -83,7 +83,7 @@ const Navbar = () => {
         </div>
 
         {/* Sign in Button for Larger Screens */}
-        <div className="hidden md:flex gap-2">
+        <div className="hidden lg:flex gap-2">
           <button className="custom-primary-btn">Sign in</button>
           <button className="custom-secondary-btn">Login</button>
         </div>

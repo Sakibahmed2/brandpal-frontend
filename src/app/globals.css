@@ -4,9 +4,9 @@
 
 @layer components {
   .custom-primary-btn {
-    @apply text-white bg-primary/90 hover:bg-primary/100 rounded-xl px-6 md:px-8 py-2 font-medium transition-all ease-in-out hover:drop-shadow-xl;
+    @apply text-white bg-primary hover:bg-purple-700 rounded-xl px-6 md:px-8 py-2 font-medium transition-all ease-in-out hover:drop-shadow-xl duration-300;
   }
   .custom-secondary-btn {
-    @apply text-white bg-secondary/90 hover:bg-secondary/100 rounded-xl px-6 md:px-8 py-2 font-medium transition-all ease-in-out hover:drop-shadow-xl;
+    @apply text-white bg-secondary hover:bg-orange-500 rounded-xl px-6 md:px-8 py-2 font-medium transition-all ease-in-out hover:drop-shadow-xl duration-300;
   }
 }
