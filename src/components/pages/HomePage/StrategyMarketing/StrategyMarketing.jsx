@@ -24,7 +24,7 @@ const StrategyMarketing = () => {
                 <Target className="text-secondary" />
                 Target audience
               </p>
-              <p className="pl-10 mt-2 text-gray-400">
+              <p className="pl-10 mt-2 light-text">
                 We will upgrade your brand so that the target audience is
                 suitable
               </p>
@@ -35,7 +35,7 @@ const StrategyMarketing = () => {
                 <FileUp className="text-secondary" />
                 Upgrade your design brand
               </p>
-              <p className="pl-10 mt-2 text-gray-400">
+              <p className="pl-10 mt-2 light-text">
                 We will upgrade your design to be more creative
               </p>
             </div>
@@ -45,7 +45,7 @@ const StrategyMarketing = () => {
                 <TrendingUp className="text-secondary" />
                 High conversation rate
               </p>
-              <p className="pl-10 mt-2 text-gray-400">
+              <p className="pl-10 mt-2 light-text">
                 We will increase your brand rating
               </p>
             </div>

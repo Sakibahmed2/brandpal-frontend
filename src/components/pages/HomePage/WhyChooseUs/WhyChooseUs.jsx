@@ -29,15 +29,15 @@ const WhyChooseUs = () => {
             </p>
 
             <div>
-              <p className="flex items-center gap-4 text-gray-400 md:text-xl">
+              <p className="flex items-center gap-4 light-text">
                 <Check className="text-secondary" />
                 We work differently
               </p>
-              <p className="flex items-center gap-4 text-gray-400 md:text-xl">
+              <p className="flex items-center gap-4 light-text">
                 <Check className="text-secondary" />
                 Manage your brand faster
               </p>
-              <p className="flex items-center gap-4 text-gray-400 md:text-xl">
+              <p className="flex items-center gap-4 light-text">
                 <Check className="text-secondary" />
                 Provide good facilities
               </p>

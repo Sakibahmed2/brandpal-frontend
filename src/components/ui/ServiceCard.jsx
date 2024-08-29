@@ -29,7 +29,7 @@ const ServiceCard = ({ icon, title, description }) => {
         <p
           className={cn(
             "md:text-xl transition-colors duration-300 ease-in-out",
-            isHovered ? "text-black" : "text-gray-400"
+            isHovered ? "text-black" : "light-text"
           )}
         >
           {description}

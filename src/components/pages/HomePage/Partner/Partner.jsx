@@ -24,7 +24,7 @@ const Partner = () => {
           width={100}
           height={100}
           alt="Sound cloud logo"
-          className="md:w-28 w-16 col-span-2 md:col-span-1"
+          className="md:w-24 w-16 col-span-2 md:col-span-1"
         />
 
         <Image
@@ -32,7 +32,7 @@ const Partner = () => {
           width={100}
           height={100}
           alt="Sound cloud logo"
-          className="md:w-28 w-16 col-span-2 md:col-span-1"
+          className="md:w-24 w-16 col-span-2 md:col-span-1"
         />
 
         <Image
@@ -40,7 +40,7 @@ const Partner = () => {
           width={100}
           height={100}
           alt="Sound cloud logo"
-          className="md:w-28 w-16 col-span-2 md:col-span-1"
+          className="md:w-24 w-16 col-span-2 md:col-span-1"
         />
 
         <Image
@@ -48,7 +48,7 @@ const Partner = () => {
           width={100}
           height={100}
           alt="Sound cloud logo"
-          className="md:w-28 w-16 col-span-3 md:col-span-1"
+          className="md:w-24 w-16 col-span-3 md:col-span-1"
         />
 
         <Image
@@ -56,7 +56,7 @@ const Partner = () => {
           width={100}
           height={100}
           alt="Sound cloud logo"
-          className="md:w-28 w-16 col-span-3 md:col-span-1"
+          className="md:w-24 w-16 col-span-3 md:col-span-1"
         />
       </div>
     </div>

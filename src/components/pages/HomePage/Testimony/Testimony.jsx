@@ -40,7 +40,7 @@ const Testimony = () => {
               <p className="md:text-xl md:font-semibold">
                 &quot;Very Creative and Professional&quot;
               </p>
-              <p className="text-gray-400 mt-3 mb-6 text-sm md:text-lg md:w-full w-[240px]">
+              <p className="light-text mt-3 mb-6 text-sm md:w-full w-[240px]">
                 Very helpful for my business, also the achievement is very big
                 and rising fast. Marketek is very professional and very
                 creative. thank you
