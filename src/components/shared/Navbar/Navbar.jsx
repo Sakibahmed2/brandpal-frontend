@@ -67,14 +67,14 @@ const Navbar = () => {
 
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white/50 backdrop-blur-md rounded-box z-[1] mt-3 right-5 w-52 p-2 shadow "
+              className="menu menu-md dropdown-content bg-white/50 backdrop-blur-md rounded-box z-[1] mt-3 right-5 w-52 p-2 shadow flex flex-col items-center"
             >
               {navItems.map((item, index) => (
                 <li key={index}>
                   <Link href={item.path}>{item.title}</Link>
                 </li>
               ))}
-              <div className="navbar-end flex flex-col gap-2">
+              <div className="navbar-end flex flex-col gap-3 mt-2">
                 <button className="custom-primary-btn">Sign in</button>
                 <button className="custom-secondary-btn">Login</button>
               </div>

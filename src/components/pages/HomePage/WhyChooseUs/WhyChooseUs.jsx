@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
             alt="why choose us image"
           />
         </div>
-        <div className="lg:w-[451px] mx-auto mt-10 md:mt-0">
+        <div className="lg:w-[451px] mx-auto mt-10 md:mt-0 text-center lg:text-left">
           <p className="text-xl text-primary hidden md:flex">WHY CHOOSE US?</p>
           <h3 className="text-2xl md:text-4xl font-semibold">
             We Serve Your Digital Objective Better{" "}

@@ -6,8 +6,8 @@ const Banner = () => {
   return (
     <div className="pt-28 md:pt-40">
       <div className="flex flex-col-reverse md:flex-row justify-center items-center">
-        <div className="mt-5 md:mt-0">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl w-[250px] md:w-full font-semibold">
+        <div className="mt-5 md:mt-0 text-center lg:text-left">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl w-[250px] lg:w-full font-semibold mx-auto">
             The next level marketing digital{" "}
           </h1>
           <p className="light-text mt-6 mb-7 md:mb-9 w-full max-w-[500px]">
@@ -24,7 +24,13 @@ const Banner = () => {
           </div>
         </div>
         <div>
-          <Image src={bannerImg} width={500} height={500} alt="Banner image" />
+          <Image
+            src={bannerImg}
+            width={500}
+            height={500}
+            alt="Banner image"
+            className="lg:w-[500px] w-[300px] "
+          />
         </div>
       </div>
     </div>

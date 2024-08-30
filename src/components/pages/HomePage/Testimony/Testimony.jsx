@@ -17,11 +17,12 @@ const Testimony = () => {
             width={720}
             height={720}
             alt="why choose us image"
+            className="lg:w-[500px] w-[300px] "
           />
         </div>
         <div className="md:w-[351px] mt-10 md:mt-0 ml-4">
           <p className="text-xl text-primary hidden md:flex">TESTIMONY</p>
-          <h3 className="text-2xl md:text-4xl font-semibold">
+          <h3 className="text-2xl md:text-4xl font-semibold text-center lg:text-left">
             Our client get a result
           </h3>
 

@@ -14,7 +14,7 @@ const StrategyMarketing = () => {
           <p className="text-xl text-primary hidden md:flex">
             FIND STRATEGY MARKETING
           </p>
-          <h3 className="text-2xl md:text-4xl font-semibold">
+          <h3 className="text-2xl md:text-4xl font-semibold text-center lg:text-left">
             Find your potentional strategy marketing
           </h3>
 
@@ -51,12 +51,13 @@ const StrategyMarketing = () => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div>
           <Image
             src={strategyMarketing}
             width={500}
             height={500}
             alt="why choose us image"
+            className="lg:w-[500px] w-[300px] "
           />
         </div>
       </div>

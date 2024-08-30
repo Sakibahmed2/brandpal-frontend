@@ -14,8 +14,8 @@ const LetsJoin = () => {
           <p className="text-xl text-primary hidden md:flex">
             LET&lsquo;S JOIN
           </p>
-          <h3 className="text-2xl md:text-4xl font-semibold mt-4 mb-6">
-            Let&lsquo;s join to make something bigger together
+          <h3 className="text-2xl md:text-4xl font-semibold mt-4 mb-6 text-center">
+            Let&rsquo;s create something amazing!
           </h3>
           <button className="custom-primary-btn py-4">Get Started</button>
         </div>
@@ -25,6 +25,7 @@ const LetsJoin = () => {
             width={500}
             height={500}
             alt="why choose us image"
+            className="lg:w-[500px] w-[300px] "
           />
         </div>
       </div>
