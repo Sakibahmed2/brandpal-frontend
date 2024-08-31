@@ -1,12 +1,11 @@
 "use client";
 
 import cn from "@/utils/cn";
-import { ArrowRight, MoveRight } from "lucide-react";
-import React, { useState } from "react";
+import { MoveRight } from "lucide-react";
+import { useState } from "react";
 
 const ServiceCard = ({ icon, title, description }) => {
   const [isHovered, setIsHovered] = useState(false);
-  console.log(isHovered);
   return (
     <div
       className={cn(
@@ -23,6 +22,13 @@ const ServiceCard = ({ icon, title, description }) => {
         )}
       >
         <p>{icon}</p>
+        {/* <Image
+          src={icon}
+          width={50}
+          height={50}
+          alt="img"
+          className="text-red-500"
+        /> */}
         <h3 className="text-xl md:text-2xl font-semibold mb-6 md:mt-16 mt-8">
           {title}
         </h3>

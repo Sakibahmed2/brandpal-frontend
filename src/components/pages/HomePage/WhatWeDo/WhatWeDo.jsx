@@ -2,6 +2,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import ServiceCard from "@/components/ui/ServiceCard";
 import { PanelsTopLeft, SquarePen, Video } from "lucide-react";
 import React from "react";
+import cameraImg from "@/assets/video-camera.png";
 
 const WhatWeDo = () => {
   return (

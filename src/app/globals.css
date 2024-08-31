@@ -11,6 +11,6 @@
   }
 
   .light-text {
-    @apply md:text-[20px] text-gray-400;
+    @apply lg:text-[18px] text-gray-400;
   }
 }
