@@ -1,10 +1,12 @@
 import SectionTitle from "@/components/ui/SectionTitle";
 import ServicesCard from "@/components/ui/ServicesCard";
 import React from "react";
+import { PanelsTopLeft, SquarePen, Video } from "lucide-react";
 
 const services = [
   {
     id: 1,
+    icon: <PanelsTopLeft size={48} />,
     title: "Search Engine Optimization (SEO)",
     description: "Boost your online presence with our expert SEO services.",
     features: [
@@ -15,6 +17,7 @@ const services = [
   },
   {
     id: 2,
+    icon: <PanelsTopLeft size={48} />,
     title: "Pay-Per-Click Advertising (PPC)",
     description: "Maximize your ROI with our targeted PPC campaigns.",
     features: [
@@ -25,6 +28,7 @@ const services = [
   },
   {
     id: 3,
+    icon: <PanelsTopLeft size={48} />,
     title: "Social Media Marketing",
     description: "Engage your audience and build brand loyalty.",
     features: [

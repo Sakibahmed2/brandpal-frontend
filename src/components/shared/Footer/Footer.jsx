@@ -46,9 +46,13 @@ const Footer = () => {
               <p className="text-xl text-secondary font-semibold">Support</p>
               <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
                 <p>About us</p>
-                <p>FAQ</p>
+                <p>
+                  <Link href="/faq">FAQ</Link>
+                </p>
                 <p>Help</p>
-                <p>Privacy and Policy</p>
+                <p>
+                  <Link href="/privacy-policy">Privacy and Policy</Link>
+                </p>
               </div>
             </div>
 
