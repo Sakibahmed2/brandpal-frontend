@@ -2,6 +2,17 @@ import React from "react";
 import Container from "../../ui/Container";
 import Link from "next/link";
 
+const navBtn = (
+  <>
+    <Link href="/register">
+      <button className="custom-primary-btn">Sign up</button>
+    </Link>
+    <Link href="/login">
+      <button className="custom-secondary-btn">Login</button>
+    </Link>
+  </>
+);
+
 const Navbar = () => {
   const navItems = [
     {
@@ -75,18 +86,14 @@ const Navbar = () => {
                 </li>
               ))}
               <div className="navbar-end flex flex-col gap-3 mt-2">
-                <button className="custom-primary-btn">Sign in</button>
-                <button className="custom-secondary-btn">Login</button>
+                {navBtn}
               </div>
             </ul>
           </div>
         </div>
 
         {/* Sign in Button for Larger Screens */}
-        <div className="hidden lg:flex gap-2">
-          <button className="custom-primary-btn">Sign in</button>
-          <button className="custom-secondary-btn">Login</button>
-        </div>
+        <div className="hidden lg:flex gap-2">{navBtn}</div>
       </div>
     </Container>
   );
