@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import loginImg from "@/assets/login.jpg";
+// import loginImg from "@/assets/login.jpg";
+import loginImg from "@/assets/images/login.jpg";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 

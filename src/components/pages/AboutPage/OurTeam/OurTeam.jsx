@@ -47,7 +47,7 @@ const OurTeam = () => {
         />
       </div>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10 mt-16 w-10/12 mx-auto">
+      <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-10 mt-16 w-10/12 mx-auto">
         {teamData.map((item) => (
           <TeamCard key={item.id} item={item} />
         ))}

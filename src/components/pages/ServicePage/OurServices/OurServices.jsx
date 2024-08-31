@@ -3,10 +3,17 @@ import ServicesCard from "@/components/ui/ServicesCard";
 import React from "react";
 import { PanelsTopLeft, SquarePen, Video } from "lucide-react";
 
+import socialMediaMarketing from "@/assets/icons/social-media-marketing.svg";
+import emailMarketing from "@/assets/icons/email-marketing.svg";
+import seo from "@/assets/icons/SEo.svg";
+import payPerClick from "@/assets/icons/pay-per-click.svg";
+import contentWriting from "@/assets/icons/content-writing.svg";
+import webDevelopment from "@/assets/icons/web-development.svg";
+
 const services = [
   {
     id: 1,
-    icon: <PanelsTopLeft size={48} />,
+    icon: seo,
     title: "Search Engine Optimization (SEO)",
     description: "Boost your online presence with our expert SEO services.",
     features: [
@@ -17,7 +24,7 @@ const services = [
   },
   {
     id: 2,
-    icon: <PanelsTopLeft size={48} />,
+    icon: payPerClick,
     title: "Pay-Per-Click Advertising (PPC)",
     description: "Maximize your ROI with our targeted PPC campaigns.",
     features: [
@@ -28,7 +35,7 @@ const services = [
   },
   {
     id: 3,
-    icon: <PanelsTopLeft size={48} />,
+    icon: socialMediaMarketing,
     title: "Social Media Marketing",
     description: "Engage your audience and build brand loyalty.",
     features: [
@@ -39,6 +46,7 @@ const services = [
   },
   {
     id: 4,
+    icon: contentWriting,
     title: "Content Marketing",
     description: "Tell your brand’s story with high-quality content.",
     features: [
@@ -49,6 +57,7 @@ const services = [
   },
   {
     id: 5,
+    icon: emailMarketing,
     title: "Email Marketing",
     description: "Nurture leads and convert them into loyal customers.",
     features: [
@@ -59,6 +68,7 @@ const services = [
   },
   {
     id: 6,
+    icon: webDevelopment,
     title: "Web Design & Development",
     description: "Create a responsive, user-friendly website for your brand.",
     features: [

@@ -14,3 +14,9 @@
     @apply lg:text-[18px] text-gray-400;
   }
 }
+
+@layer utilities {
+  .clip-polygon {
+    clip-path: polygon(0 0, 100% 0%, 100% 75%, 0 100%);
+  }
+}

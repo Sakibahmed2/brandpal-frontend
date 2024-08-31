@@ -1,5 +1,6 @@
 import React from "react";
-import aboutUsInfo from "@/assets/about-us-info.jpg";
+// import aboutUsInfo from "@/assets/about-us-info.jpg";
+import aboutUsInfo from "@/assets/images/about-us-info.png";
 import Image from "next/image";
 
 const AboutUsInfo = () => {
@@ -8,7 +9,7 @@ const AboutUsInfo = () => {
       <p className="text-xl text-primary md:hidden flex justify-center mb-3">
         About us
       </p>
-      <div className="flex flex-col-reverse lg:flex-row justify-between items-center w-full">
+      <div className="flex flex-col-reverse lg:flex-row justify-between items-center w-full gap-10">
         <div className="lg:w-1/2">
           <p className="text-xl text-primary hidden md:flex">About us</p>
           <h3 className="text-2xl md:text-4xl font-semibold text-center lg:text-left">

@@ -1,5 +1,6 @@
 import React from "react";
-import aboutImage from "@/assets/about-us-image.jpg";
+// import aboutImage from "@/assets/about-us-image.jpg";
+import aboutImage from "@/assets/images/about us.svg";
 import Image from "next/image";
 import { CircleArrowRight } from "lucide-react";
 

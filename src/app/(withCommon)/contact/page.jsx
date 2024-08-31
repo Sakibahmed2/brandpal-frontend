@@ -5,7 +5,7 @@ import React from "react";
 const ContactPage = () => {
   return (
     <Container className="pt-20 lg:pt-32 pb-20">
-      <div className="w-full lg:flex justify-between items-center">
+      <div className="w-full lg:flex justify-between items-center gap-5">
         <div className="lg:w-1/2">
           <h3 className="text-3xl lg:text-4xl font-semibold">Get in touch</h3>
           <p className="light-text mt-4 mb-6">
@@ -15,7 +15,7 @@ const ContactPage = () => {
             phone, email, or live chat, or visit our office during business
             hours.
           </p>
-          <div className="grid lg:grid-cols-2 gap-2 lg:gap-5">
+          <div className="grid xl:grid-cols-2 gap-2 lg:gap-5">
             <div className="flex items-center gap-4">
               <p className="bg-orange-100 p-2 lg:p-5 rounded-full">
                 <Phone />

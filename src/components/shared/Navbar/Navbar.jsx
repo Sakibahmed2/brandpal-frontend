@@ -1,73 +1,77 @@
-import React from "react";
-import Container from "../../ui/Container";
-import Link from "next/link";
+"use client";
 
-const navBtn = (
-  <>
-    <Link href="/register">
-      <button className="custom-primary-btn">Sign up</button>
-    </Link>
-    <Link href="/login">
-      <button className="custom-secondary-btn">Login</button>
-    </Link>
-  </>
-);
+import React, { useState } from "react";
+import Link from "next/link";
+import Container from "@/components/ui/Container";
+import { usePathname } from "next/navigation";
+import cn from "@/utils/cn";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navItems = [
-    {
-      title: "Home",
-      path: "/",
-    },
-    {
-      title: "Service",
-      path: "/service",
-    },
-    {
-      title: "About us",
-      path: "/about",
-    },
-    {
-      title: "Contact",
-      path: "/contact",
-    },
+    { title: "Home", path: "/" },
+    { title: "Service", path: "/service" },
+    { title: "About us", path: "/about" },
+    { title: "Contact", path: "/contact" },
   ];
 
+  const pathname = usePathname();
+
   return (
-    <div className="navbar px-4 mx-auto fixed top-0 left-0 right-0 z-50 bg-white">
+    <div className="px-4 mx-auto fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
       <Container>
-        <div className="flex w-full justify-between items-center">
+        <div className="container mx-auto flex justify-between items-center py-4">
           <Link href="/">
-            <p className="text-3xl lg:text-4xl font-semibold text-primary">
+            <p className="text-3xl lg:text-4xl font-semibold text-primary cursor-pointer">
               BRAND<span className="text-secondary">PAL</span>
             </p>
           </Link>
 
           {/* Navbar for larger screens */}
-          <div className="hidden lg:flex">
-            <ul className="menu-horizontal space-x-16 px-1">
-              {navItems.map((item, index) => (
-                <li
-                  key={index}
-                  className="hover:text-orange-500 transition-all ease-in-out"
+          <div className="hidden lg:flex space-x-10">
+            {navItems.map((item, index) => (
+              <Link key={index} href={item.path}>
+                <p
+                  className={cn(
+                    "hover:text-orange-500 transition-all ease-in-out cursor-pointer",
+                    pathname === item.path && "text-orange-500"
+                  )}
                 >
-                  <Link href={item.path}>{item.title}</Link>
-                </li>
-              ))}
-            </ul>
+                  {item.title}
+                </p>
+              </Link>
+            ))}
           </div>
 
-          {/* Dropdown Menu on the Right for Mobile */}
-          <div className="lg:hidden flex items-center ">
-            <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:hidden"
-              >
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden flex items-center">
+            <button
+              type="button"
+              className="focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-expanded={isMenuOpen}
+              aria-label="Toggle Navigation"
+            >
+              {isMenuOpen ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-primary "
+                  className="h-6 w-6 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-primary"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -79,27 +83,53 @@ const Navbar = () => {
                     d="M4 6h16M4 12h8m-8 6h16"
                   />
                 </svg>
-              </div>
-
-              <ul
-                tabIndex={0}
-                className="menu menu-md dropdown-content bg-white/50 backdrop-blur-md rounded-box z-[1] mt-3 right-5 w-52 p-2 shadow flex flex-col items-center"
-              >
-                {navItems.map((item, index) => (
-                  <li key={index}>
-                    <Link href={item.path}>{item.title}</Link>
-                  </li>
-                ))}
-                <div className="navbar-end flex flex-col gap-3 mt-2">
-                  {navBtn}
-                </div>
-              </ul>
-            </div>
+              )}
+            </button>
           </div>
 
           {/* Sign in Button for Larger Screens */}
-          <div className="hidden lg:flex gap-2">{navBtn}</div>
+          <div className="hidden lg:flex gap-2">
+            <Link href="/register">
+              <button className="bg-primary text-white rounded-lg px-4 py-2">
+                Sign up
+              </button>
+            </Link>
+            <Link href="/login">
+              <button className="bg-secondary text-white rounded-lg px-4 py-2">
+                Login
+              </button>
+            </Link>
+          </div>
         </div>
+
+        {/* Dropdown Menu for Mobile */}
+        {isMenuOpen && (
+          <div className="lg:hidden rounded-lg p-4">
+            <ul className="space-y-4">
+              {navItems.map((item, index) => (
+                <li key={index}>
+                  <Link href={item.path}>
+                    <p className="text-center text-gray-800 hover:text-orange-500 transition-all ease-in-out cursor-pointer">
+                      {item.title}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+              <div className="flex flex-col gap-3 mt-4 justify-center items-center">
+                <Link href="/register">
+                  <button className="bg-primary text-white rounded-lg px-4 py-2">
+                    Sign up
+                  </button>
+                </Link>
+                <Link href="/login">
+                  <button className="bg-secondary text-white rounded-lg px-4 py-2">
+                    Login
+                  </button>
+                </Link>
+              </div>
+            </ul>
+          </div>
+        )}
       </Container>
     </div>
   );

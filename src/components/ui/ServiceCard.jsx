@@ -4,7 +4,8 @@ import cn from "@/utils/cn";
 import { MoveRight } from "lucide-react";
 import { useState } from "react";
 
-const ServiceCard = ({ icon, title, description }) => {
+const ServiceCard = ({ service }) => {
+  const { title, description, icon } = service;
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div

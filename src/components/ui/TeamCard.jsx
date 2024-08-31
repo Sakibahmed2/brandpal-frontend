@@ -14,7 +14,7 @@ const TeamCard = ({ item }) => {
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
           "mx-auto rounded-lg duration-500 ease-in-out",
-          isHovered ? "bg-secondary/50" : "lg:bg-gray-200 bg-secondary/50"
+          isHovered ? "bg-secondary/50" : "xl:bg-gray-200 bg-secondary/50"
         )}
       >
         <Image
@@ -22,7 +22,7 @@ const TeamCard = ({ item }) => {
           alt={item.name}
           className={cn(
             "mx-auto rounded-lg object-cover h-72 lg:h-80 duration-500 ease-in-out",
-            isHovered ? "saturate-100" : "lg:saturate-0"
+            isHovered ? "saturate-100" : "xl:saturate-0"
           )}
         />
       </div>

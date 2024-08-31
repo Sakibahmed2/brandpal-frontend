@@ -4,8 +4,10 @@ import React from "react";
 const PrivacyPolicyPage = () => {
   return (
     <div className="pt-20 pb-20">
-      <div className="text-center bg-gray-300 h-40 flex justify-center items-center">
-        <h3 className="text-3xl font-semibold">Privacy and Policy</h3>
+      <div className="text-center bg-gradient-to-r from-primary to-secondary h-40 flex justify-center items-center clip-polygon">
+        <h3 className="text-3xl lg:text-4xl font-semibold text-white">
+          Privacy and Policy
+        </h3>
       </div>
 
       <Container>
