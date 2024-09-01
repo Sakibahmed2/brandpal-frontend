@@ -37,7 +37,9 @@ const Footer = () => {
               </p>
               <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
                 <p>Our Product</p>
-                <p>Our Testimony</p>
+                <p>
+                  <Link href="/testimony">Our Testimony</Link>
+                </p>
                 <p>Find Marketing</p>
               </div>
             </div>
