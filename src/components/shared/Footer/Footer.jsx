@@ -36,24 +36,29 @@ const Footer = () => {
                 Why Marketek
               </p>
               <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
-                <p>Our Product</p>
+                <p>
+                  <Link href="/product">Our product</Link>
+                </p>
                 <p>
                   <Link href="/testimony">Our Testimony</Link>
                 </p>
                 <p>Find Marketing</p>
+                <p>About us</p>
               </div>
             </div>
 
             <div>
               <p className="text-xl text-secondary font-semibold">Support</p>
               <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
-                <p>About us</p>
                 <p>
                   <Link href="/faq">FAQ</Link>
                 </p>
                 <p>Help</p>
                 <p>
                   <Link href="/privacy-policy">Privacy and Policy</Link>
+                </p>
+                <p>
+                  <Link href="/privacy-policy">Terms and condition</Link>
                 </p>
               </div>
             </div>

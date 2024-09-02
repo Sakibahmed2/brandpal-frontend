@@ -1,6 +1,7 @@
 import SectionTitle from "@/components/ui/SectionTitle";
 import ServiceCard from "@/components/ui/ServiceCard";
-import { PanelsTopLeft, SquarePen, Video } from "lucide-react";
+import { MoveRight, PanelsTopLeft, SquarePen, Video } from "lucide-react";
+import Link from "next/link";
 
 const services = [
   {
@@ -38,6 +39,13 @@ const WhatWeDo = () => {
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
+      </div>
+      <div className="flex justify-center items-center mt-5">
+        <Link href={"/service"}>
+          <button className="custom-secondary-btn flex items-center gap-5 py-3">
+            See all <MoveRight size={24} />
+          </button>
+        </Link>
       </div>
     </div>
   );
