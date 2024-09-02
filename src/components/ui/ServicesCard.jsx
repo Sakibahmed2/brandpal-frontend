@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 
 const ServicesCard = ({ service }) => {
-  console.log(service);
   return (
     <div className="rounded-md bg-base-100 shadow-sm hover:shadow-lg transition-shadow duration-300 border">
       <div className="card-body ">
