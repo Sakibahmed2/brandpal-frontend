@@ -8,6 +8,7 @@ import cn from "@/utils/cn";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const user = true;
 
   const navItems = [
     { title: "Home", path: "/" },
@@ -17,6 +18,34 @@ const Navbar = () => {
   ];
 
   const pathname = usePathname();
+
+  const authButtons = (
+    <>
+      {user ? (
+        <>
+          {" "}
+          <Link href="/register">
+            <button className="bg-primary text-white rounded-lg px-4 py-2">
+              Sign up
+            </button>
+          </Link>
+          <Link href="/login">
+            <button className="bg-secondary text-white rounded-lg px-4 py-2">
+              Login
+            </button>
+          </Link>{" "}
+        </>
+      ) : (
+        <>
+          <Link href="/">
+            <button className="bg-red-50 font-semibold border-2 border-red-500 rounded-md px-8 py-2">
+              Logout
+            </button>
+          </Link>
+        </>
+      )}
+    </>
+  );
 
   return (
     <div className="px-4 mx-auto fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
@@ -88,18 +117,7 @@ const Navbar = () => {
           </div>
 
           {/* Sign in Button for Larger Screens */}
-          <div className="hidden lg:flex gap-2">
-            <Link href="/register">
-              <button className="bg-primary text-white rounded-lg px-4 py-2">
-                Sign up
-              </button>
-            </Link>
-            <Link href="/login">
-              <button className="bg-secondary text-white rounded-lg px-4 py-2">
-                Login
-              </button>
-            </Link>
-          </div>
+          <div className="hidden lg:flex gap-2">{authButtons}</div>
         </div>
 
         {/* Dropdown Menu for Mobile */}
@@ -116,16 +134,7 @@ const Navbar = () => {
                 </li>
               ))}
               <div className="flex flex-col gap-3 mt-4 justify-center items-center">
-                <Link href="/register">
-                  <button className="bg-primary text-white rounded-lg px-4 py-2">
-                    Sign up
-                  </button>
-                </Link>
-                <Link href="/login">
-                  <button className="bg-secondary text-white rounded-lg px-4 py-2">
-                    Login
-                  </button>
-                </Link>
+                {authButtons}
               </div>
             </ul>
           </div>
