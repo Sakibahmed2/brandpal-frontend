@@ -55,10 +55,9 @@ const sidebarItems = [
 
 const Sidebar = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
-    <div className="drawer bg-gray-900 px-5 pb-5 h-screen w-72">
+    <div className="drawer bg-gray-900 px-5 pb-5 h-full max-h-screen w-72">
       <div className="text-3xl font-semibold mx-auto mt-10 ">
         <Link href="/" className="mt-10 py-5 px-10 bg-gray-800 rounded-lg">
           BRAND<span className="text-gray-500">PAL</span>

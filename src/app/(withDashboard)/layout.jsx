@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }) => {
         <div className="drawer-content flex flex-col items-center ">
           {/* Page content here */}
 
-          {children}
+          <div className="w-full max-w-[1190px]">{children}</div>
 
           <label
             htmlFor="my-drawer-2"

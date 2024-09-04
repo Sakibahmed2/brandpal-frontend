@@ -38,7 +38,7 @@ const transactionsData = [
 
 const DashboardHomePage = () => {
   return (
-    <div className="w-full max-w-[1190px] mt-5 ">
+    <div className=" mt-5 ">
       <OverviewSection />
 
       {/* customer chart */}
