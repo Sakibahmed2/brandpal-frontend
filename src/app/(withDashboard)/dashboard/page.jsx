@@ -38,14 +38,14 @@ const transactionsData = [
 
 const DashboardHomePage = () => {
   return (
-    <div className=" mt-5 ">
+    <div className=" mt-0 lg:mt-5">
       <OverviewSection />
 
       {/* customer chart */}
-      <div className="mt-4 lg:flex ">
+      <div className="mt-4  lg:flex ">
         <ChartSection />
 
-        <div className="bg-gray-900 p-5 mx-4 lg:mx-0 lg:w-[280px] lg:ml-4 mt-4 lg:mt-0">
+        <div className="dark:bg-gray-900 bg-gray-50 p-5 mx-4 lg:mx-0 lg:w-[280px] lg:ml-4 mt-4 lg:mt-0">
           <p className="text-xl lg:text-2xl pb-2 lg:pb-4">Transaction</p>
           <hr className="border-gray-500 " />
 

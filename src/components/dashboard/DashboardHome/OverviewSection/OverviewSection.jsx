@@ -11,7 +11,7 @@ import React from "react";
 
 const OverviewSection = () => {
   return (
-    <div className="bg-gray-900 py-10 px-5 mx-4 lg:mx-0 mt-4 lg:mt-0 rounded-t-xl">
+    <div className="dark:bg-gray-900 bg-gray-50 py-10 px-5 mx-4 lg:mx-0 mt-4 lg:mt-0 rounded-t-xl">
       <div className="lg:flex justify-between items-center pb-5 text-center lg:text-start">
         <div>
           <h2 className="text-xl lg:text-3xl mt-4 lg:mt-0">

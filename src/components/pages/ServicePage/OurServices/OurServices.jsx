@@ -1,7 +1,6 @@
 import SectionTitle from "@/components/ui/SectionTitle";
 import ServicesCard from "@/components/ui/ServicesCard";
 import React from "react";
-import { PanelsTopLeft, SquarePen, Video } from "lucide-react";
 
 import socialMediaMarketing from "@/assets/icons/social-media-marketing.svg";
 import emailMarketing from "@/assets/icons/email-marketing.svg";

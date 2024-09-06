@@ -1,6 +1,7 @@
 "use client";
 
 import AnalyticsCard from "@/components/ui/AnalyticsCard";
+import { useTheme } from "next-themes";
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
@@ -72,6 +73,8 @@ const analyticsData = [
 ];
 
 const AnalyticsPage = () => {
+  const { theme } = useTheme();
+
   const series = [
     {
       name: "Revenue",
@@ -89,7 +92,7 @@ const AnalyticsPage = () => {
 
   const options = {
     chart: {
-      type: "area",
+      type: "bar",
       toolbar: {
         show: false,
       },
@@ -112,14 +115,14 @@ const AnalyticsPage = () => {
       ],
       labels: {
         style: {
-          colors: "#FFFFFF", // Text color set to white
+          colors: theme === "dark" ? "#FFFFFF" : "#000000", // Change text color based on theme
         },
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: "#FFFFFF", // Text color set to white
+          colors: theme === "dark" ? "#FFFFFF" : "#000000", // Change text color based on theme
         },
       },
     },
@@ -127,32 +130,29 @@ const AnalyticsPage = () => {
     dataLabels: {
       enabled: false,
     },
-
     legend: {
       position: "top",
       horizontalAlign: "right",
       labels: {
-        colors: "#FFFFFF", // Text color set to white
+        colors: theme === "dark" ? "#FFFFFF" : "#000000", // Change legend text color
       },
       containerMargin: {
-        top: 10, // Add margin to the top of the legend
+        top: 10,
         left: 0,
         right: 0,
         bottom: 0,
       },
       itemMargin: {
-        horizontal: 10, // Horizontal gap between legend items
-        vertical: 5, // Vertical gap between legend items
+        horizontal: 10,
+        vertical: 5,
       },
-      offsetX: 10, // Additional horizontal padding
-      offsetY: 5, // Additional vertical padding
+      offsetX: 10,
+      offsetY: 5,
     },
-
     grid: {
       show: true,
-      borderColor: "#f1f1f1",
+      borderColor: theme === "dark" ? "#333333" : "#f1f1f1", // Change grid line color
     },
-
     responsive: [
       {
         breakpoint: 1024,
@@ -171,11 +171,6 @@ const AnalyticsPage = () => {
         options: {
           chart: {
             height: 250,
-          },
-          xaxis: {
-            labels: {
-              show: true,
-            },
           },
         },
       },
@@ -204,14 +199,14 @@ const AnalyticsPage = () => {
   };
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 mx-5 lg:mx-0">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {analyticsData.map((item) => (
           <AnalyticsCard key={item.id} item={item} />
         ))}
       </div>
 
-      <div className="bg-gray-900 mt-5 p-5">
+      <div className="dark:bg-gray-900 mt-5 p-5">
         <div>
           <h3 className="text-xl lg:text-2xl">Weekly Sales Report</h3>
         </div>

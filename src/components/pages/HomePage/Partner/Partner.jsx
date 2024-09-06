@@ -6,6 +6,7 @@ import blender from "@/assets/blender.png";
 import soundCloud from "@/assets/sound_cloud.png";
 import mi from "@/assets/mi.png";
 import Image from "next/image";
+import Marquee from "react-fast-marquee";
 
 const Partner = () => {
   return (
@@ -18,46 +19,53 @@ const Partner = () => {
       </div>
 
       {/* company logo */}
-      <div className="grid grid-cols-6 md:grid-cols-5 justify-items-center items-center gap-4 mt-10 md:mt-24">
-        <Image
-          src={soundCloud}
-          width={100}
-          height={100}
-          alt="Sound cloud logo"
-          className="md:w-24 w-16 col-span-2 md:col-span-1"
-        />
+      <div className="mt-10 md:mt-24">
+        <Marquee direction="right" className="flex items-center gap-4 py-4">
+          {/* SoundCloud Logo */}
+          <Image
+            src={soundCloud}
+            width={100}
+            height={100}
+            alt="SoundCloud logo"
+            className="md:w-24 w-16 lg:mx-20 mx-8"
+          />
 
-        <Image
-          src={google}
-          width={100}
-          height={100}
-          alt="Sound cloud logo"
-          className="md:w-24 w-16 col-span-2 md:col-span-1"
-        />
+          {/* Google Logo */}
+          <Image
+            src={google}
+            width={100}
+            height={100}
+            alt="Google logo"
+            className="md:w-24 w-16 lg:mx-20 mx-8"
+          />
 
-        <Image
-          src={sublimeText}
-          width={100}
-          height={100}
-          alt="Sound cloud logo"
-          className="md:w-24 w-16 col-span-2 md:col-span-1"
-        />
+          {/* Sublime Text Logo */}
+          <Image
+            src={sublimeText}
+            width={100}
+            height={100}
+            alt="Sublime Text logo"
+            className="md:w-24 w-16 lg:mx-20 mx-8"
+          />
 
-        <Image
-          src={blender}
-          width={100}
-          height={100}
-          alt="Sound cloud logo"
-          className="md:w-24 w-16 col-span-3 md:col-span-1"
-        />
+          {/* Blender Logo */}
+          <Image
+            src={blender}
+            width={100}
+            height={100}
+            alt="Blender logo"
+            className="md:w-24 w-16 lg:mx-20 mx-8"
+          />
 
-        <Image
-          src={mi}
-          width={100}
-          height={100}
-          alt="Sound cloud logo"
-          className="md:w-24 w-16 col-span-3 md:col-span-1"
-        />
+          {/* MI Logo */}
+          <Image
+            src={mi}
+            width={100}
+            height={100}
+            alt="MI logo"
+            className="md:w-24 w-16 lg:mx-20 mx-8"
+          />
+        </Marquee>
       </div>
     </div>
   );

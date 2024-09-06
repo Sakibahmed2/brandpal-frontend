@@ -80,14 +80,15 @@ const services = [
 
 const DashboardServicesPage = () => {
   return (
-    <div className="mt-5 h-screen">
-      <div className="flex justify-between items-center bg-gray-900 p-5 rounded-md">
+    <div className="mt-5 h-screen mx-5 lg:mx-0">
+      <div className="flex justify-between items-center dark:bg-gray-900 bg-gray-50 p-5 rounded-md">
         <p className="text-xl lg:text-2xl">Services</p>
         <button className="custom-dashboard-btn">Add service</button>
       </div>
+
       <div className="border-2  p-5 mt-5 border-gray-950 rounded-lg shadow-md">
         <div className="overflow-x-auto ">
-          <table className="table table-zebra text-center ">
+          <table className="table   text-center ">
             {/* head */}
             <thead className="text-white/80">
               <tr>
@@ -103,7 +104,7 @@ const DashboardServicesPage = () => {
                 <tr key={service.id}>
                   <th>{index + 1}</th>
                   <th>
-                    <div className="bg-sky-400 text-white flex justify-center items-center py-2 rounded-md">
+                    <div className="bg-sky-400 text-white flex justify-center items-center py-2  rounded-md">
                       <Image
                         src={service.icon}
                         alt={service.title}

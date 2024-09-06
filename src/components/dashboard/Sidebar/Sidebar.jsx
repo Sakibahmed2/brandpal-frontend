@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import cn from "@/utils/cn";
 import {
   BadgeDollarSign,
@@ -57,9 +58,12 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="drawer bg-gray-900 px-5 pb-5 h-full max-h-screen w-72">
+    <div className="drawer dark:bg-gray-900 bg-gray-200 px-5 pb-5 h-full max-h-screen w-72">
       <div className="text-3xl font-semibold mx-auto mt-10 ">
-        <Link href="/" className="mt-10 py-5 px-10 bg-gray-800 rounded-lg">
+        <Link
+          href="/"
+          className="mt-10 py-5 px-10 bg-gray-800 rounded-lg text-white"
+        >
           BRAND<span className="text-gray-500">PAL</span>
         </Link>
       </div>
@@ -95,6 +99,10 @@ const Sidebar = () => {
           <LogOut />
           <p>Log out</p>
         </Link>
+
+        <div>
+          <ThemeSwitcher />
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import { useTheme } from "next-themes";
 import ReactApexChart from "react-apexcharts";
 
 const ChartSection = () => {
+  const { theme } = useTheme();
+
   const series = [
     {
       name: "Young Age",
@@ -40,14 +42,14 @@ const ChartSection = () => {
       ],
       labels: {
         style: {
-          colors: "#FFFFFF", // Text color set to white
+          colors: theme === "dark" ? "#FFFFFF" : "#000000", // White for dark mode, black for light mode
         },
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: "#FFFFFF", // Text color set to white
+          colors: theme === "dark" ? "#FFFFFF" : "#000000", // White for dark mode, black for light mode
         },
       },
     },
@@ -55,12 +57,11 @@ const ChartSection = () => {
     dataLabels: {
       enabled: false,
     },
-
     legend: {
       position: "top",
       horizontalAlign: "right",
       labels: {
-        colors: "#FFFFFF", // Text color set to white
+        colors: theme === "dark" ? "#FFFFFF" : "#000000", // White for dark mode, black for light mode
       },
       containerMargin: {
         top: 10, // Add margin to the top of the legend
@@ -75,12 +76,10 @@ const ChartSection = () => {
       offsetX: 10, // Additional horizontal padding
       offsetY: 5, // Additional vertical padding
     },
-
     grid: {
       show: true,
-      borderColor: "#f1f1f1",
+      borderColor: theme === "dark" ? "#333333" : "#f1f1f1", // Darker grid lines for dark mode
     },
-
     responsive: [
       {
         breakpoint: 1024,
@@ -132,7 +131,7 @@ const ChartSection = () => {
   };
 
   return (
-    <div className="bg-gray-900 p-5 mx-4 lg:mx-0 lg:w-[900px]">
+    <div className="dark:bg-gray-900 bg-gray-50 p-5 mx-4 lg:mx-0 lg:w-[900px]">
       <div className="lg:flex justify-between items-center">
         <div>
           <p className="text-xl lg:text-2xl">Customer Waves</p>
@@ -151,7 +150,7 @@ const ChartSection = () => {
         </div> */}
       </div>
 
-      <div className="p-4 text-white rounded-md">
+      <div className="p-4 rounded-md">
         <ReactApexChart
           options={options}
           series={series}

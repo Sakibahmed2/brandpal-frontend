@@ -11,7 +11,7 @@ const Testimony = () => {
         TESTIMONY
       </p>
       <div className="md:flex justify-between items-center w-full ">
-        <div className="md:w-[720px]">
+        <div className="md:w-1/2">
           <Image
             src={testimonialImg}
             width={720}
@@ -20,7 +20,7 @@ const Testimony = () => {
             className="lg:w-[500px] w-[300px] "
           />
         </div>
-        <div className="md:w-[351px] mt-10 md:mt-0 ml-4">
+        <div className="md:w-1/2 mt-10 md:mt-0 ml-4">
           <p className="text-xl text-primary hidden md:flex">TESTIMONY</p>
           <h3 className="text-2xl md:text-4xl font-semibold text-center lg:text-left">
             Our client get a result

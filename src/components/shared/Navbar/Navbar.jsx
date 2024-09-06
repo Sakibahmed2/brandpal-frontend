@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,8 @@ import cn from "@/utils/cn";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasShadow, setHasShadow] = useState(false);
+
   const user = true;
 
   const navItems = [
@@ -19,18 +21,34 @@ const Navbar = () => {
 
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setHasShadow(true);
+      } else {
+        setHasShadow(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const authButtons = (
     <>
       {user ? (
         <>
           {" "}
           <Link href="/register">
-            <button className="bg-primary text-white rounded-lg px-4 py-2">
+            <button className="bg-primary text-white rounded-md px-6 py-2">
               Sign up
             </button>
           </Link>
           <Link href="/login">
-            <button className="bg-secondary text-white rounded-lg px-4 py-2">
+            <button className="custom-outline-btn bg-secondary/10 hover:bg-orange-500 border-orange-500">
               Login
             </button>
           </Link>{" "}
@@ -48,7 +66,12 @@ const Navbar = () => {
   );
 
   return (
-    <div className="px-4 mx-auto fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+    <div
+      className={cn(
+        "px-4 mx-auto fixed top-0 left-0 right-0 z-50 bg-white transition-all ease-in-out duration-300",
+        hasShadow && "shadow-md"
+      )}
+    >
       <Container>
         <div className="container mx-auto flex justify-between items-center py-4">
           <Link href="/">

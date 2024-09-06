@@ -1,9 +1,13 @@
 "use client";
 
+import { ChartColumnDecreasing, ChartPie, File } from "lucide-react";
+import { useTheme } from "next-themes";
 import React from "react";
 import ApexCharts from "react-apexcharts"; // Ensure you have apexcharts installed
 
 const ReportsPage = () => {
+  const { theme } = useTheme();
+
   const series = [
     {
       name: "Young Age",
@@ -32,14 +36,14 @@ const ReportsPage = () => {
       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
       labels: {
         style: {
-          colors: "#FFF",
+          colors: theme === "dark" ? "#FFFFFF" : "#000000",
         },
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: "#FFF",
+          colors: theme === "dark" ? "#FFFFFF" : "#000000",
         },
       },
     },
@@ -52,7 +56,7 @@ const ReportsPage = () => {
       position: "top",
       horizontalAlign: "right",
       labels: {
-        colors: "#FFFFFF", // Text color set to white
+        colors: theme === "dark" ? "#FFFFFF" : "#000000",
       },
       containerMargin: {
         top: 10, // Add margin to the top of the legend
@@ -124,37 +128,42 @@ const ReportsPage = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Report Cards */}
-        <div className="bg-gray-900 p-6 rounded-lg shadow-lg flex items-center">
-          {/* <FaChartPie className="w-12 h-12 text-purple-500 mr-4" /> */}
+    <div className="mt-5 min-h-screen mx-5 lg:mx-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+          <p className="w-12 h-12 text-purple-500 mr-4">
+            <ChartPie size={42} />
+          </p>
           <div>
-            <h3 className="text-lg font-semibold">Sales Report</h3>
+            <h3 className="text-xl ">Sales Report</h3>
             <p className="text-gray-400">View sales by category</p>
           </div>
         </div>
 
-        <div className="bg-gray-900 p-6 rounded-lg shadow-lg flex items-center">
-          {/* <FaChartBar className="w-12 h-12 text-blue-500 mr-4" /> */}
+        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+          <p className="w-12 h-12 text-blue-500 mr-4">
+            <ChartColumnDecreasing size={42} />
+          </p>
           <div>
-            <h3 className="text-lg font-semibold">Revenue Report</h3>
+            <h3 className="text-xl ">Revenue Report</h3>
             <p className="text-gray-400">View revenue trends</p>
           </div>
         </div>
 
-        <div className="bg-gray-900 p-6 rounded-lg shadow-lg flex items-center">
-          {/* <FaFileAlt className="w-12 h-12 text-green-500 mr-4" /> */}
+        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+          <p className=" text-green-500 mr-4">
+            <File size={42} />
+          </p>
           <div>
-            <h3 className="text-lg font-semibold">Expense Report</h3>
+            <h3 className="text-xl ">Expense Report</h3>
             <p className="text-gray-400">View expense breakdown</p>
           </div>
         </div>
       </div>
 
       {/* Charts */}
-      <div className="bg-gray-900 mt-8 p-6 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-4">Customer Waves</h3>
+      <div className="dark:bg-gray-900 mt-5 p-5 rounded-lg shadow-md">
+        <h3 className="text-xl lg:text-2xl mb-4">Customer Waves</h3>
         <ApexCharts
           options={options}
           series={series}
@@ -164,8 +173,8 @@ const ReportsPage = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-gray-900 mt-8 p-6 rounded-lg shadow-lg">
-        <h3 className="text-lg font-semibold mb-4">Recent Transactions</h3>
+      <div className="dark:bg-gray-900 mt-5 p-5 rounded-lg shadow-md">
+        <h3 className="text-xl lg:text-2xl  mb-4">Recent Transactions</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
             <thead>
