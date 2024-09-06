@@ -86,7 +86,7 @@ const DashboardServicesPage = () => {
         <button className="custom-dashboard-btn">Add service</button>
       </div>
 
-      <div className="border-2  p-5 mt-5 border-gray-950 rounded-lg shadow-md">
+      <div className="dark:bg-gray-900 bg-gray-50 p-5 mt-5 rounded-lg ">
         <div className="overflow-x-auto ">
           <table className="table   text-center ">
             {/* head */}

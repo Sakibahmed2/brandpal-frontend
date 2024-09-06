@@ -1,4 +1,5 @@
 import ServiceHeader from "@/components/pages/ServicePage/Header/Header";
+import OfferSection from "@/components/pages/ServicePage/OfferSection/OfferSection";
 import OurServices from "@/components/pages/ServicePage/OurServices/OurServices";
 import Container from "@/components/ui/Container";
 
@@ -9,6 +10,7 @@ const ServicePage = () => {
 
       <OurServices />
 
+      <OfferSection />
       <div className="mt-16 text-center">
         <h2 className="text-3xl font-bold text-primary mb-4">
           Ready to Grow Your Business?

@@ -130,7 +130,7 @@ const ReportsPage = () => {
   return (
     <div className="mt-5 min-h-screen mx-5 lg:mx-0">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg flex items-center">
           <p className="w-12 h-12 text-purple-500 mr-4">
             <ChartPie size={42} />
           </p>
@@ -140,7 +140,7 @@ const ReportsPage = () => {
           </div>
         </div>
 
-        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg flex items-center">
           <p className="w-12 h-12 text-blue-500 mr-4">
             <ChartColumnDecreasing size={42} />
           </p>
@@ -150,7 +150,7 @@ const ReportsPage = () => {
           </div>
         </div>
 
-        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg shadow-md flex items-center">
+        <div className="dark:bg-gray-900 bg-gray-50 p-6 rounded-lg flex items-center">
           <p className=" text-green-500 mr-4">
             <File size={42} />
           </p>
@@ -162,7 +162,7 @@ const ReportsPage = () => {
       </div>
 
       {/* Charts */}
-      <div className="dark:bg-gray-900 mt-5 p-5 rounded-lg shadow-md">
+      <div className="dark:bg-gray-900 bg-gray-50 mt-5 p-5 rounded-lg ">
         <h3 className="text-xl lg:text-2xl mb-4">Customer Waves</h3>
         <ApexCharts
           options={options}
@@ -173,7 +173,7 @@ const ReportsPage = () => {
       </div>
 
       {/* Table */}
-      <div className="dark:bg-gray-900 mt-5 p-5 rounded-lg shadow-md">
+      <div className="dark:bg-gray-900 bg-gray-50 mt-5 p-5 rounded-lg">
         <h3 className="text-xl lg:text-2xl  mb-4">Recent Transactions</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
