@@ -7,7 +7,7 @@ const TestimonyPage = () => {
     <Container className="pt-32 pb-20">
       <div className="">
         <div className="text-center">
-          <h3 className="text-3xl lg:text-4xl font-semibold">
+          <h3 className="text-2xl mg:text-3xl lg:text-4xl font-semibold">
             This is What Our Esteemed Clients Have to Say
           </h3>
           <p className="light-text lg:w-[450px] mx-auto mt-2">

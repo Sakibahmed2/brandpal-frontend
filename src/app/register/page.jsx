@@ -1,11 +1,40 @@
+"use client";
+
 import Container from "@/components/ui/Container";
-import React from "react";
-// import loginImg from "@/assets/login.jpg";
 import loginImg from "@/assets/images/login.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
+import { useCreateUserMutation } from "@/redux/api/authApi";
 
 const RegisterPage = () => {
+  const [addUser] = useCreateUserMutation();
+
+  // handle form submission
+  const handleSubmit = async (e) => {
+    const toastId = toast.loading("Please wait...");
+    e.preventDefault();
+
+    const userData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      dateOfBirth: e.target.dateOfBirth.value,
+    };
+
+    try {
+      const res = await addUser(userData).unwrap();
+
+      console.log(res);
+
+      if (res?.success) {
+        toast.success(res?.message, { id: toastId });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="bg-zinc-100 h-screen flex justify-center items-center ">
       <Container className="bg-white p-5 rounded-md shadow-md mx-4 lg:mx-0">
@@ -17,18 +46,23 @@ const RegisterPage = () => {
           <div className="divider divider-horizontal"></div>
 
           <div className="lg:w-1/2 ">
-            <form className="max-w-lg mx-auto p-1 lg:p-6  rounded-lg">
+            <form
+              onSubmit={handleSubmit}
+              className="max-w-lg mx-auto p-1 lg:p-6 rounded-lg"
+            >
               <h2 className="text-2xl lg:text-3xl font-semibold border-b-2 pb-2 mb-3">
-                Please sing up here
+                Please sign up here
               </h2>
+
               <div className="form-control mb-4">
                 <label className="label">
                   <span className="label-text">Full Name</span>
                 </label>
                 <input
                   type="text"
+                  name="name"
                   placeholder="Enter your full name"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full "
                 />
               </div>
 
@@ -38,6 +72,7 @@ const RegisterPage = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="Enter your email address"
                   className="input input-bordered w-full"
                 />
@@ -49,12 +84,26 @@ const RegisterPage = () => {
                 </label>
                 <input
                   type="password"
+                  name="password"
                   placeholder="Enter your password"
                   className="input input-bordered w-full"
                 />
               </div>
 
-              <div className=" mb-4 flex items-center">
+              <div className="form-control mb-4">
+                <label className="label">
+                  <span className="label-text">Date of Birth</span>
+                </label>
+                <input
+                  type="text"
+                  name="dateOfBirth"
+                  className="input input-bordered w-full"
+                  placeholder="YYYY-MM-DD"
+                  pattern="\d{4}-\d{2}-\d{2}"
+                />
+              </div>
+
+              <div className="mb-4 flex items-center">
                 <input type="checkbox" className="checkbox" />
                 <label className="label ml-2">
                   I agree to the Terms and Conditions
@@ -62,7 +111,9 @@ const RegisterPage = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="custom-primary-btn py-3">Register</button>
+                <button type="submit" className="custom-primary-btn py-3">
+                  Register
+                </button>
               </div>
 
               <div className="mt-4 text-center">

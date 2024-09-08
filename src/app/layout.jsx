@@ -1,6 +1,10 @@
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "sonner";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
+import Providers from "@/libs/providers/Providers";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body className={ubuntu.className}>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

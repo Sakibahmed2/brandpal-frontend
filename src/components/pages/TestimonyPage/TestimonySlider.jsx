@@ -42,13 +42,36 @@ const TestimonySlider = () => {
     className: "center mx-4",
     centerMode: true,
     infinite: true,
-    slidesToShow: 1, // Display 2 testimonials at a time
+    slidesToShow: 3,
     centerPadding: "10px",
     speed: 500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "40px",
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "10px",
+        },
+      },
+    ],
   };
 
   return (
-    <div className="w-full max-w-[1000px] mx-auto slider-container">
+    <div className="w-full mx-auto slider-container">
       <Slider {...settings}>
         {testimonials.map((testimonial) => (
           <div key={testimonial.id} className="p-4">
