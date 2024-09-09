@@ -1,6 +1,6 @@
 "use client";
 
-import cn from "@/utils/cn";
+import cn from "@/libs/cn";
 import { MoveRight } from "lucide-react";
 import { useState } from "react";
 

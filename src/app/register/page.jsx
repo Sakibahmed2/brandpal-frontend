@@ -31,6 +31,7 @@ const RegisterPage = () => {
         toast.success(res?.message, { id: toastId });
       }
     } catch (err) {
+      toast.error(err?.data?.message, { id: toastId });
       console.log(err);
     }
   };

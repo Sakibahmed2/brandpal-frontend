@@ -7,7 +7,7 @@ import shaounImg from "@/assets/team/shaoun.png";
 import minhazImg from "@/assets/team/minhaz.png";
 import sakibImg from "@/assets/team/sakib.png";
 import Image from "next/image";
-import cn from "@/utils/cn";
+import cn from "@/libs/cn";
 import TeamCard from "@/components/ui/TeamCard";
 
 const teamData = [

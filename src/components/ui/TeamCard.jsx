@@ -1,6 +1,6 @@
 "use client";
 
-import cn from "@/utils/cn";
+import cn from "@/libs/cn";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";

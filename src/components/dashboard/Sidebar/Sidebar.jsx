@@ -1,7 +1,8 @@
 "use client";
 
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
-import cn from "@/utils/cn";
+import cn from "@/libs/cn";
+import { getUserInfo } from "@/utils/getUserInfo";
 import {
   Archive,
   BadgeDollarSign,
@@ -70,7 +71,9 @@ const userSidebarItems = [
   },
 ];
 
-const role = "user";
+const userInfo = getUserInfo();
+
+const userRole = userInfo?.role;
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -88,7 +91,7 @@ const Sidebar = () => {
       <ul className="p-4 space-y-6 ">
         {/* Sidebar content here */}
 
-        {role === "admin"
+        {userRole === "admin"
           ? adminSidebarItems.map((item) => (
               <Link
                 href={item.path}

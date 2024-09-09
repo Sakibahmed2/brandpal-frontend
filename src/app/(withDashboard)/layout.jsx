@@ -1,8 +1,11 @@
+"use client";
+
 import Sidebar from "@/components/dashboard/Sidebar/Sidebar";
-import cn from "@/utils/cn";
+import cn from "@/libs/cn";
+import { getUserInfo } from "@/utils/getUserInfo";
 import { Menu } from "lucide-react";
-import { ThemeProvider } from "next-themes";
 import { Montserrat } from "next/font/google";
+import { useRouter } from "next/navigation";
 
 const montserrat = Montserrat({
   weight: ["400"],
@@ -10,6 +13,13 @@ const montserrat = Montserrat({
 });
 
 const DashboardLayout = ({ children }) => {
+  const userInfo = getUserInfo();
+  const router = useRouter();
+
+  if (!userInfo) {
+    return router.push("/login");
+  }
+
   return (
     <div
       className={cn(

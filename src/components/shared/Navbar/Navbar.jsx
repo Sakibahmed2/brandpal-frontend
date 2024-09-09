@@ -4,13 +4,16 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { usePathname } from "next/navigation";
-import cn from "@/utils/cn";
+import cn from "@/libs/cn";
+import { getUserInfo } from "@/utils/getUserInfo";
+import AuthButton from "@/components/ui/AuthButton";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
 
-  const user = true;
+  const userInfo = getUserInfo();
+  const userRole = userInfo?.role;
 
   const navItems = [
     { title: "Home", path: "/" },
@@ -18,6 +21,10 @@ const Navbar = () => {
     { title: "About us", path: "/about" },
     { title: "Contact", path: "/contact" },
   ];
+
+  if (userRole === "admin" || userRole === "user") {
+    navItems.push({ title: "Dashboard", path: `/dashboard/${userRole}` });
+  }
 
   const pathname = usePathname();
 
@@ -36,34 +43,6 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  const authButtons = (
-    <>
-      {user ? (
-        <>
-          {" "}
-          <Link href="/register">
-            <button className="bg-primary text-white rounded-md px-6 py-2">
-              Sign up
-            </button>
-          </Link>
-          <Link href="/login">
-            <button className="custom-outline-btn bg-secondary/10 hover:bg-orange-500 border-orange-500">
-              Login
-            </button>
-          </Link>{" "}
-        </>
-      ) : (
-        <>
-          <Link href="/">
-            <button className="bg-red-50 font-semibold border-2 border-red-500 rounded-md px-8 py-2">
-              Logout
-            </button>
-          </Link>
-        </>
-      )}
-    </>
-  );
 
   return (
     <div
@@ -140,7 +119,9 @@ const Navbar = () => {
           </div>
 
           {/* Sign in Button for Larger Screens */}
-          <div className="hidden lg:flex gap-2">{authButtons}</div>
+          <div className="hidden lg:flex gap-2">
+            <AuthButton />
+          </div>
         </div>
 
         {/* Dropdown Menu for Mobile */}
@@ -157,7 +138,7 @@ const Navbar = () => {
                 </li>
               ))}
               <div className="flex flex-col gap-3 mt-4 justify-center items-center">
-                {authButtons}
+                <AuthButton />
               </div>
             </ul>
           </div>
