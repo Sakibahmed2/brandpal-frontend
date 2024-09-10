@@ -1,5 +1,6 @@
 "use client";
 
+import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
 import { ChartColumnDecreasing, ChartPie, File } from "lucide-react";
 import { useTheme } from "next-themes";
 import React from "react";
@@ -7,6 +8,9 @@ import ApexCharts from "react-apexcharts"; // Ensure you have apexcharts install
 
 const ReportsPage = () => {
   const { theme } = useTheme();
+  const { data, isLoading } = useGetAllTransactionsQuery({});
+
+  if (isLoading) return <p>Loading...</p>;
 
   const series = [
     {
@@ -173,38 +177,41 @@ const ReportsPage = () => {
       </div>
 
       {/* Table */}
-      <div className="dark:bg-gray-900 bg-gray-50 mt-5 p-5 rounded-lg">
-        <h3 className="text-xl lg:text-2xl  mb-4">Recent Transactions</h3>
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-sm">
+      <div className="mt-5 dark:bg-gray-900 bg-gray-50 p-5 ">
+        <div className=" overflow-x-auto">
+          <table className="table w-full">
             <thead>
               <tr>
-                <th className="px-4 py-2">Date</th>
-                <th className="px-4 py-2">Description</th>
-                <th className="px-4 py-2">Amount</th>
+                <th className="dark:text-gray-400">Date</th>
+                <th className="dark:text-gray-400">Email</th>
+                <th className="dark:text-gray-400">Amount</th>
+                <th className="dark:text-gray-400">Status</th>
+                <th className="dark:text-gray-400">Transaction ID</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b">
-                <td className="px-4 py-2">March 20, 2022</td>
-                <td className="px-4 py-2">Balance Top Up</td>
-                <td className="px-4 py-2 text-green-500">$200</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-4 py-2">March 15, 2022</td>
-                <td className="px-4 py-2">Pay Rent</td>
-                <td className="px-4 py-2 text-red-500">$100</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-4 py-2">March 12, 2022</td>
-                <td className="px-4 py-2">Office Rent</td>
-                <td className="px-4 py-2 text-red-500">$500</td>
-              </tr>
-              <tr>
-                <td className="px-4 py-2">March 11, 2022</td>
-                <td className="px-4 py-2">Electricity</td>
-                <td className="px-4 py-2 text-red-500">$80</td>
-              </tr>
+              {data?.data.map((billing) => (
+                <tr key={billing._id}>
+                  <td className="px-4 py-2">
+                    {new Date(billing.date).toLocaleDateString()}
+                  </td>
+                  <td className="px-4 py-2">{billing.email}</td>
+                  <td className="px-4 py-2">{`$${billing.price}`}</td>
+
+                  <td className="px-4 py-2">
+                    <span
+                      className={`badge ${
+                        billing.status === "ongoing"
+                          ? "badge-success"
+                          : "badge-error"
+                      }`}
+                    >
+                      {billing.status}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2">{billing.transactionId}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

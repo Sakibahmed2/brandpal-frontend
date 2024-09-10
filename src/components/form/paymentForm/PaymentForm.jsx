@@ -4,6 +4,7 @@ import { useConfirmPaymentMutation } from "@/redux/api/paymentApi";
 import { removeOrder } from "@/redux/features/orderSlice";
 import { getUserInfo } from "@/utils/getUserInfo";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -16,6 +17,7 @@ const PaymentForm = () => {
   const userInfo = getUserInfo();
   const [confirmPayment] = useConfirmPaymentMutation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const myOrder = useSelector((state) => state.orders.orders);
   const totalPrice = myOrder.reduce((total, item) => total + item.price, 0);
@@ -94,6 +96,7 @@ const PaymentForm = () => {
         if (res.success) {
           dispatch(removeOrder());
           toast.success(res?.message);
+          router.push("/dashboard/user");
         }
       }
     }

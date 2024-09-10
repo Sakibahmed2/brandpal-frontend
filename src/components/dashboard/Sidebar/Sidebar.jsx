@@ -3,6 +3,7 @@
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import cn from "@/libs/cn";
 import { getUserInfo } from "@/utils/getUserInfo";
+import { removeUserInfo } from "@/utils/local-storage";
 import {
   Archive,
   BadgeDollarSign,
@@ -15,12 +16,13 @@ import {
   Settings,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const userInfo = getUserInfo();
   const userRole = userInfo?.role;
   const pathname = usePathname();
+  const router = useRouter();
 
   const sideBarItem = [];
 
@@ -80,6 +82,11 @@ const Sidebar = () => {
     );
   }
 
+  const handleLogout = () => {
+    removeUserInfo();
+    router.push("/");
+  };
+
   return (
     <div className="drawer dark:bg-gray-900 bg-gray-200 px-5 pb-5 h-full max-h-screen w-72">
       <div className="text-3xl font-semibold mx-auto mt-10 ">
@@ -115,13 +122,13 @@ const Sidebar = () => {
           <Settings />
           <p>Setting</p>
         </Link>
-        <Link
-          href={"/dashboard"}
-          className="flex items-center space-x-5 text-red-500"
+        <button
+          onClick={handleLogout}
+          className="flex items-center space-x-5 text-red-500 "
         >
           <LogOut />
           <p>Log out</p>
-        </Link>
+        </button>
 
         <div>
           <ThemeSwitcher />

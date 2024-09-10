@@ -1,6 +1,14 @@
 "use client";
 
+import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
+
 const AdminBillingDashboard = () => {
+  const { data, isLoading } = useGetAllTransactionsQuery({});
+
+  if (isLoading) return <p>Loading...</p>;
+
+  console.log(data?.data);
+
   // Sample billing data for users
   const billingData = [
     {
@@ -41,35 +49,34 @@ const AdminBillingDashboard = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th className="dark:text-gray-400">ID</th>
-                <th className="dark:text-gray-400">Name</th>
-                <th className="dark:text-gray-400">Plan</th>
-                <th className="dark:text-gray-400">Amount</th>
-                <th className="dark:text-gray-400">Payment Status</th>
                 <th className="dark:text-gray-400">Date</th>
+                <th className="dark:text-gray-400">Email</th>
+                <th className="dark:text-gray-400">Amount</th>
+                <th className="dark:text-gray-400">Status</th>
+                <th className="dark:text-gray-400">Transaction ID</th>
               </tr>
             </thead>
             <tbody>
-              {billingData.map((billing) => (
-                <tr key={billing.id}>
-                  <td>{billing.id}</td>
-                  <td>{billing.name}</td>
-                  <td>{billing.plan}</td>
-                  <td>{billing.amount}</td>
-                  <td>
+              {data?.data.map((billing) => (
+                <tr key={billing._id}>
+                  <td className="px-4 py-2">
+                    {new Date(billing.date).toLocaleDateString()}
+                  </td>
+                  <td className="px-4 py-2">{billing.email}</td>
+                  <td className="px-4 py-2">{`$${billing.price}`}</td>
+
+                  <td className="px-4 py-2">
                     <span
                       className={`badge ${
-                        billing.paymentStatus === "Paid"
+                        billing.status === "ongoing"
                           ? "badge-success"
-                          : billing.paymentStatus === "Pending"
-                          ? "badge-warning"
-                          : ""
+                          : "badge-error"
                       }`}
                     >
-                      {billing.paymentStatus}
+                      {billing.status}
                     </span>
                   </td>
-                  <td>{billing.date}</td>
+                  <td className="px-4 py-2">{billing.transactionId}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,5 +1,8 @@
+"use client";
+
 import ChartSection from "@/components/dashboard/DashboardHome/ChartSection/ChartSection";
 import OverviewSection from "@/components/dashboard/DashboardHome/OverviewSection/OverviewSection";
+import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
 import { Bell, CircleUserRound, Mail, Users } from "lucide-react";
 import React from "react";
 
@@ -37,6 +40,10 @@ const transactionsData = [
 ];
 
 const DashboardHomePage = () => {
+  const { data, isLoading } = useGetAllTransactionsQuery({});
+
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <div className=" mt-0 lg:mt-5">
       <OverviewSection />
@@ -50,16 +57,18 @@ const DashboardHomePage = () => {
           <hr className="border-gray-500 " />
 
           <div className="mt-4 space-y-5">
-            {transactionsData.map((transaction) => (
+            {data?.data.map((transaction) => (
               <div
-                key={transaction.id}
+                key={transaction._id}
                 className="flex justify-between items-center"
               >
                 <div>
-                  <p>{transaction.title}</p>
-                  <p className="text-gray-400 text-sm">{transaction.date}</p>
+                  <p>{transaction.email}</p>
+                  <p className="text-gray-400 text-sm">
+                    {new Date(transaction.date).toLocaleDateString()}
+                  </p>
                 </div>
-                <p>$ {transaction.amount}</p>
+                <p>$ {transaction.price}</p>
               </div>
             ))}
           </div>

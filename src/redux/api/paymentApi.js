@@ -17,8 +17,24 @@ const paymentApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
+    getAllTransactions: builder.query({
+      query: () => ({
+        url: "/payment/transactions",
+      }),
+    }),
+
+    getSingleTransaction: builder.query({
+      query: ({ email }) => ({
+        url: `/payment/transactions/${email}`,
+      }),
+    }),
   }),
 });
 
-export const { useCreatePaymentIntentMutation, useConfirmPaymentMutation } =
-  paymentApi;
+export const {
+  useCreatePaymentIntentMutation,
+  useConfirmPaymentMutation,
+  useGetAllTransactionsQuery,
+  useGetSingleTransactionQuery,
+} = paymentApi;
