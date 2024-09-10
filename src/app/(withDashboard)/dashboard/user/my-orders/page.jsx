@@ -1,55 +1,74 @@
-import React from "react";
+"use client";
 
-const orders = [
-  {
-    id: "ORD12345",
-    date: "2024-09-01T10:30:00Z",
-    total: 99.99,
-    status: "Shipped",
-  },
-  {
-    id: "ORD12346",
-    date: "2024-09-02T11:45:00Z",
-    total: 199.99,
-    status: "Processing",
-  },
-];
+import { removeOrder } from "@/redux/features/orderSlice";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyOrdersPage = () => {
+  const myOrder = useSelector((state) => state.orders.orders);
+  const dispatch = useDispatch();
+
   return (
     <div className="mt-5">
       <div className="flex justify-between items-center dark:bg-gray-900 bg-gray-50 p-5 rounded-md">
         <p className="text-xl lg:text-2xl">My orders</p>
-        <button className="custom-dashboard-btn">Pay</button>
+        {myOrder.length ? (
+          <Link href={"/dashboard/user/payment"}>
+            <button className="custom-dashboard-btn">Pay</button>
+          </Link>
+        ) : (
+          <button disabled className="custom-dashboard-btn">
+            Pay
+          </button>
+        )}
       </div>
-      <div className="min-h-screen dark:bg-gray-900 bg-gray-50 p-8">
+
+      <div className="min-h-screen dark:bg-gray-900 bg-gray-50 p-5">
         <div className="container mx-auto">
-          {orders.length === 0 ? (
+          {myOrder.length === 0 ? (
             <p className="text-center text-gray-600">You have no orders yet.</p>
           ) : (
-            <div className="dark:bg-gray-800  shadow-md rounded-lg p-6">
+            <div className="dark:bg-gray-800 bg-white rounded-lg p-4 overflow-auto">
               <table className="min-w-full table-auto">
                 <thead>
-                  <tr className="dark:bg-gray-700 bg-gray-200">
-                    <th className="px-4 py-2 text-left">Order ID</th>
-                    <th className="px-4 py-2 text-left">Date</th>
-                    <th className="px-4 py-2 text-left">Total</th>
-                    <th className="px-4 py-2 text-left">Status</th>
+                  <tr className="dark:bg-gray-700 bg-gray-100">
+                    <th className="px-4 py-2 text-left">Service</th>
+                    <th className="px-4 py-2 text-left">Duration</th>
+                    <th className="px-4 py-2 text-left">Price</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((order) => (
-                    <tr key={order.id} className="border-b">
-                      <td className="px-4 py-2">{order.id}</td>
-                      <td className="px-4 py-2">
-                        {new Date(order.date).toLocaleDateString()}
-                      </td>
-                      <td className="px-4 py-2">${order.total}</td>
-                      <td className="px-4 py-2">{order.status}</td>
+                  {myOrder.map((order, index) => (
+                    <tr key={index} className="border-b">
+                      <td className="px-4 py-2">{order.title}</td>
+                      <td className="px-4 py-2">{order.time}</td>
+                      <td className="px-4 py-2">${order.price}</td>
                     </tr>
                   ))}
                 </tbody>
+                <tfoot>
+                  <tr className="dark:bg-gray-700 bg-gray-100 font-bold">
+                    <td className="px-4 py-2 text-left" colSpan="2">
+                      Total
+                    </td>
+
+                    <td className="px-4 py-2 text-left text-green-500">
+                      $
+                      {myOrder
+                        .reduce((acc, order) => acc + order.price, 0)
+                        .toFixed(2)}
+                    </td>
+                  </tr>
+                </tfoot>
               </table>
+              <div className="flex justify-end w-full mt-5">
+                <button
+                  onClick={() => dispatch(removeOrder())}
+                  className="custom-outline-btn bg-red-50 dark:bg-red-400 hover:bg-red-500 border-red-500 "
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           )}
         </div>

@@ -1,11 +1,59 @@
+"use client";
+
+import { addOrder } from "@/redux/features/orderSlice";
+import { getUserInfo } from "@/utils/getUserInfo";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 const ServicesCard = ({ service }) => {
+  const dispatch = useDispatch();
+  const userInfo = getUserInfo();
+  const router = useRouter();
+  const myOrder = useSelector((state) => state.orders.orders);
+  console.log(myOrder);
+
+  const handleAddOrder = () => {
+    if (!userInfo?.id) {
+      Swal.fire({
+        title: "Please login",
+        text: "You wan to login first to order this product",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          return router.push("/login");
+        }
+      });
+    } else if (
+      service.id ===
+      myOrder.find((order) => order.serviceId === service.id)?.serviceId
+    ) {
+      toast.error("Service already added to cart");
+    } else {
+      const order = {
+        userId: userInfo.id,
+        serviceId: service.id,
+        title: service.title,
+        price: service.price,
+        time: service.time,
+        description: service.description,
+      };
+      dispatch(addOrder(order));
+      toast.success("Service added to cart");
+    }
+  };
+
   return (
     // <Link href={`/service/${service.id}`}>
     <div className="rounded-md bg-base-100 shadow-sm hover:shadow-lg transition-shadow duration-300 border">
-      <div className="card-body ">
-        <div className=" mx-auto lg:mx-0 mb-3 p-2 rounded-md w-20 flex justify-center items-center bg-secondary/10">
+      <div className="card-body">
+        <div className="mx-auto lg:mx-0 mb-3 p-2 rounded-md w-20 flex justify-center items-center bg-secondary/10">
           <Image src={service.icon} alt="service icon" className="w-12" />
         </div>
         <hr />
@@ -19,7 +67,21 @@ const ServicesCard = ({ service }) => {
             <li key={idx}>{feature}</li>
           ))}
         </ul>
-        <button className="custom-outline-btn bg-secondary/5 border-secondary hover:bg-secondary">
+
+        {/* Service time and price */}
+        <div className="mt-4">
+          <p className=" font-semibold text-gray-600">
+            Service Time: <span className="text-primary">{service.time}</span>
+          </p>
+          <p className="font-semibold text-gray-600">
+            Price: <span className="text-primary">${service.price}</span>
+          </p>
+        </div>
+
+        <button
+          onClick={handleAddOrder}
+          className="custom-outline-btn bg-secondary/5 border-secondary hover:bg-secondary mt-4"
+        >
           Buy service
         </button>
       </div>

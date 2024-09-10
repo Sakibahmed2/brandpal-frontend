@@ -17,66 +17,68 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const adminSidebarItems = [
-  {
-    id: 1,
-    label: "Home",
-    path: "/dashboard/admin",
-    icon: House,
-  },
-  {
-    id: 2,
-    label: "Analytics",
-    path: "/dashboard/admin/analytics",
-    icon: ChartPie,
-  },
-  {
-    id: 3,
-    label: "Services",
-    path: "/dashboard/admin/services",
-    icon: MessageCircle,
-  },
-  {
-    id: 4,
-    label: "Reports",
-    path: "/dashboard/admin/reports",
-    icon: File,
-  },
-  {
-    id: 4,
-    label: "Offer",
-    path: "/dashboard/admin/offer",
-    icon: BadgeDollarSign,
-  },
-  {
-    id: 5,
-    label: "Billing",
-    path: "/dashboard/admin/billing",
-    icon: ReceiptText,
-  },
-];
-
-const userSidebarItems = [
-  {
-    id: 1,
-    label: "Home",
-    path: "/dashboard/user",
-    icon: House,
-  },
-  {
-    id: 2,
-    label: "My orders",
-    path: "/dashboard/user/my-orders",
-    icon: Archive,
-  },
-];
-
-const userInfo = getUserInfo();
-
-const userRole = userInfo?.role;
-
 const Sidebar = () => {
+  const userInfo = getUserInfo();
+  const userRole = userInfo?.role;
   const pathname = usePathname();
+
+  const sideBarItem = [];
+
+  if (userRole === "admin") {
+    sideBarItem.push(
+      {
+        id: 1,
+        label: "Home",
+        path: "/dashboard/admin",
+        icon: House,
+      },
+      {
+        id: 2,
+        label: "Analytics",
+        path: "/dashboard/admin/analytics",
+        icon: ChartPie,
+      },
+      {
+        id: 3,
+        label: "Services",
+        path: "/dashboard/admin/services",
+        icon: MessageCircle,
+      },
+      {
+        id: 4,
+        label: "Reports",
+        path: "/dashboard/admin/reports",
+        icon: File,
+      },
+      {
+        id: 4,
+        label: "Offer",
+        path: "/dashboard/admin/offer",
+        icon: BadgeDollarSign,
+      },
+      {
+        id: 5,
+        label: "Billing",
+        path: "/dashboard/admin/billing",
+        icon: ReceiptText,
+      }
+    );
+  } else if (userRole === "user") {
+    sideBarItem.push(
+      {
+        id: 1,
+        label: "Home",
+        path: "/dashboard/user",
+        icon: House,
+      },
+      {
+        id: 2,
+        label: "My orders",
+        path: "/dashboard/user/my-orders",
+        icon: Archive,
+      }
+    );
+  }
 
   return (
     <div className="drawer dark:bg-gray-900 bg-gray-200 px-5 pb-5 h-full max-h-screen w-72">
@@ -91,37 +93,21 @@ const Sidebar = () => {
       <ul className="p-4 space-y-6 ">
         {/* Sidebar content here */}
 
-        {userRole === "admin"
-          ? adminSidebarItems.map((item) => (
-              <Link
-                href={item.path}
-                key={item.id}
-                className={cn(
-                  "flex items-center space-x-5 py-2 px-4 rounded-md",
-                  pathname === item.path
-                    ? "bg-gradient-to-r from-gray-600 to-gray-900 text-white"
-                    : ""
-                )}
-              >
-                <item.icon />
-                <p>{item.label}</p>
-              </Link>
-            ))
-          : userSidebarItems.map((item) => (
-              <Link
-                href={item.path}
-                key={item.id}
-                className={cn(
-                  "flex items-center space-x-5 py-2 px-4 rounded-md",
-                  pathname === item.path
-                    ? "bg-gradient-to-r from-gray-600 to-gray-900 text-white"
-                    : ""
-                )}
-              >
-                <item.icon />
-                <p>{item.label}</p>
-              </Link>
-            ))}
+        {sideBarItem.map((item) => (
+          <Link
+            href={item.path}
+            key={item.id}
+            className={cn(
+              "flex items-center space-x-5 py-2 px-4 rounded-md",
+              pathname === item.path
+                ? "bg-gradient-to-r from-gray-600 to-gray-900 text-white"
+                : ""
+            )}
+          >
+            <item.icon />
+            <p>{item.label}</p>
+          </Link>
+        ))}
       </ul>
       <hr className="border-gray-600" />
       <div className="space-y-5">

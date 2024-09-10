@@ -20,6 +20,8 @@ const services = [
       "On-Page & Off-Page Optimization",
       "Technical & Local SEO",
     ],
+    time: "6 months",
+    price: 1500,
   },
   {
     id: 2,
@@ -31,6 +33,8 @@ const services = [
       "Keyword Targeting",
       "A/B Testing & Conversion Tracking",
     ],
+    time: "3 months",
+    price: 1200,
   },
   {
     id: 3,
@@ -42,6 +46,8 @@ const services = [
       "Content Creation & Curation",
       "Community Management",
     ],
+    time: "6 months",
+    price: 900,
   },
   {
     id: 4,
@@ -53,6 +59,8 @@ const services = [
       "Blog Writing & Visual Content",
       "Email Marketing Campaigns",
     ],
+    time: "1 month",
+    price: 500,
   },
   {
     id: 5,
@@ -64,6 +72,8 @@ const services = [
       "Template Design & Automation",
       "Segmentation & Performance Analytics",
     ],
+    time: "2 months",
+    price: 750,
   },
   {
     id: 6,
@@ -75,6 +85,8 @@ const services = [
       "Responsive Development",
       "UX/UI Design & E-commerce Solutions",
     ],
+    time: "3 months",
+    price: 2500,
   },
 ];
 
