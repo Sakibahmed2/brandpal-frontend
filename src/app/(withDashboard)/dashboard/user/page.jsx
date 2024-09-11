@@ -10,6 +10,7 @@ import seo from "@/assets/icons/SEo.svg";
 import payPerClick from "@/assets/icons/pay-per-click.svg";
 import contentWriting from "@/assets/icons/content-writing.svg";
 import webDevelopment from "@/assets/icons/web-development.svg";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const services = [
   {
@@ -105,6 +106,8 @@ const UserDashboardPage = () => {
     email: userInfo.email,
   });
 
+  const { data: userData } = useGetSingleUserQuery(userInfo?.id);
+
   const { transactionId, email, price, serviceName, status, date } =
     data?.data || {};
 
@@ -127,7 +130,7 @@ const UserDashboardPage = () => {
         <div className="lg:flex justify-between items-center pb-5 text-center lg:text-start">
           <div>
             <h2 className="text-xl lg:text-3xl mt-4 lg:mt-0">
-              Good Morning, {userInfo.name || "User"}!
+              Good Morning, {userData?.data.name || "User"}!
             </h2>
             <p className="light-text">Your ID: {userInfo.id || "N/A"}</p>
           </div>
@@ -154,50 +157,63 @@ const UserDashboardPage = () => {
             <h2 className=" text-secondary text-left lg:text-2xl mb-4 font-semibold">
               Recent Activity
             </h2>
-            <ul className="space-y-4">
-              {serviceName?.map((service, idx) => (
-                <li
-                  key={idx}
-                  className="flex justify-between items-center border-b pb-2"
-                >
-                  <div>
-                    <p className="font-semibold">
-                      <span className="text-primary">{service}</span>
-                    </p>
-                    <span className="dark:text-gray-300 text-gray-500 lg:text-sm text-xs">
-                      Transaction ID: {transactionId}
-                    </span>
-                  </div>
-                  <div>
-                    <span
-                      className={
-                        status === "completed"
-                          ? "text-sky-500"
-                          : status === "ongoing"
-                          ? "text-green-500"
-                          : "text-error"
-                      }
-                    >
-                      {status}
-                    </span>
-                    <p className="lg:text-sm text-xs">
-                      End Time: {getServiceEndTime(service)}
-                    </p>
-                  </div>
-                </li>
-              ))}
-              <li className="flex justify-between items-center pt-4">
-                <div>
-                  <p className="font-semibold">Total Price</p>
-                  <span className="dark:text-gray-300 text-gray-500">
-                    ${price}
-                  </span>
-                </div>
-                <span className="dark:text-gray-300 text-gray-500">
-                  {new Date(date).toLocaleDateString()}
-                </span>
+
+            {data?.data?.length === null ? (
+              <li className="flex justify-between items-center border-b pb-2 border-gray-500">
+                <p className="font-semibold">
+                  <span className="text-primary">No recent activity</span>
+                </p>
               </li>
-            </ul>
+            ) : (
+              ""
+            )}
+
+            {data?.data?.length !== 0 && (
+              <ul className="space-y-4">
+                {serviceName?.map((service, index) => (
+                  <li
+                    key={index}
+                    className="flex justify-between items-center border-b pb-2"
+                  >
+                    <div>
+                      <p className="font-semibold">
+                        <span className="text-primary">{service}</span>
+                      </p>
+                      <span className="dark:text-gray-300 text-gray-500 lg:text-sm text-xs">
+                        Transaction ID: {transactionId}
+                      </span>
+                    </div>
+                    <div>
+                      <span
+                        className={
+                          status === "completed"
+                            ? "text-sky-500"
+                            : status === "ongoing"
+                            ? "text-green-500"
+                            : "text-error"
+                        }
+                      >
+                        {status}
+                      </span>
+                      <p className="lg:text-sm text-xs">
+                        End Time: {getServiceEndTime(service)}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+                <li className="flex justify-between items-center pt-4">
+                  <div>
+                    <p className="font-semibold">Total Price</p>
+                    <span className="dark:text-gray-300 text-gray-500">
+                      ${price}
+                    </span>
+                  </div>
+                  <span className="dark:text-gray-300 text-gray-500">
+                    {new Date(date).toLocaleDateString()}
+                  </span>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

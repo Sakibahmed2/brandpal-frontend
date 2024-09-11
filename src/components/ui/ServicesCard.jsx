@@ -13,7 +13,6 @@ const ServicesCard = ({ service }) => {
   const userInfo = getUserInfo();
   const router = useRouter();
   const myOrder = useSelector((state) => state.orders.orders);
-  console.log(myOrder);
 
   const handleAddOrder = () => {
     if (!userInfo?.id) {

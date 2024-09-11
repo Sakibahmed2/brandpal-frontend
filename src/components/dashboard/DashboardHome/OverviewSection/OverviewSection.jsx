@@ -1,3 +1,5 @@
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import { getUserInfo } from "@/utils/getUserInfo";
 import {
   Bell,
   BriefcaseBusiness,
@@ -7,15 +9,22 @@ import {
   ShoppingCart,
   Users,
 } from "lucide-react";
-import React from "react";
 
 const OverviewSection = () => {
+  const userInfo = getUserInfo();
+  const { data, isLoading } = useGetSingleUserQuery(userInfo?.id);
+
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <div className="dark:bg-gray-900 bg-gray-50 py-10 px-5 mx-4 lg:mx-0 mt-4 lg:mt-0 rounded-t-xl">
       <div className="lg:flex justify-between items-center pb-5 text-center lg:text-start">
         <div>
           <h2 className="text-xl lg:text-3xl mt-4 lg:mt-0">
-            Good Morning, George!
+            Good Morning,{" "}
+            <span className="text-primary font-semibold">
+              {data?.data?.name}
+            </span>
           </h2>
           <p className="light-text">Your ID: 13647832648</p>
         </div>

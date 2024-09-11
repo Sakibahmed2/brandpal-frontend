@@ -27,7 +27,6 @@ const LoginPage = () => {
 
     try {
       const res = await loginUser(userData).unwrap();
-      console.log(res);
       if (res?.success) {
         setUserInfo(res?.data?.accessToken);
         toast.success(res?.message, { id: toastId });
@@ -35,7 +34,6 @@ const LoginPage = () => {
       }
     } catch (err) {
       toast.error(err?.data?.message, { id: toastId });
-      console.log(err);
     }
   };
 

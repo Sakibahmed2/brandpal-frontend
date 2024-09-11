@@ -6,9 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useCreateUserMutation } from "@/redux/api/authApi";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const [addUser] = useCreateUserMutation();
+  const router = useRouter();
 
   // handle form submission
   const handleSubmit = async (e) => {
@@ -25,14 +27,12 @@ const RegisterPage = () => {
     try {
       const res = await addUser(userData).unwrap();
 
-      console.log(res);
-
       if (res?.success) {
         toast.success(res?.message, { id: toastId });
+        router.push("/login");
       }
     } catch (err) {
       toast.error(err?.data?.message, { id: toastId });
-      console.log(err);
     }
   };
 

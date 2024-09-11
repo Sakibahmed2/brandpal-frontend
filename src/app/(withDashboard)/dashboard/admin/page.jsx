@@ -3,8 +3,6 @@
 import ChartSection from "@/components/dashboard/DashboardHome/ChartSection/ChartSection";
 import OverviewSection from "@/components/dashboard/DashboardHome/OverviewSection/OverviewSection";
 import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
-import { Bell, CircleUserRound, Mail, Users } from "lucide-react";
-import React from "react";
 
 const transactionsData = [
   {

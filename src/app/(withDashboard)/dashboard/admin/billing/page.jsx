@@ -7,8 +7,6 @@ const AdminBillingDashboard = () => {
 
   if (isLoading) return <p>Loading...</p>;
 
-  console.log(data?.data);
-
   // Sample billing data for users
   const billingData = [
     {

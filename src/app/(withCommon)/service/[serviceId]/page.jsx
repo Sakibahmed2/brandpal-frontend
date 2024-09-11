@@ -80,8 +80,6 @@ const services = [
 const SingleService = ({ params }) => {
   const service = services.find((service) => service.id == params.serviceId);
 
-  console.log(service);
-
   return (
     <Container>
       <div className="pt-20 lg:pt-32 pb-20"></div>
