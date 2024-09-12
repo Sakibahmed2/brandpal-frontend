@@ -1,19 +1,30 @@
 "use client";
 
+import LoadingPage from "@/components/ui/LoadingPage";
+import { useGetAllUserQuery } from "@/redux/api/userApi";
 import { useTheme } from "next-themes";
 import ReactApexChart from "react-apexcharts";
 
 const ChartSection = () => {
   const { theme } = useTheme();
+  const { data, isLoading } = useGetAllUserQuery({});
+
+  if (isLoading) return <LoadingPage />;
+
+  const usersData = data?.data;
+
+  const countryCounts = usersData.reduce((acc, user) => {
+    acc[user.country] = (acc[user.country] || 0) + 1;
+    return acc;
+  }, {});
 
   const series = [
     {
-      name: "Young Age",
-      data: [10, 20, 15, 25, 18, 22, 10],
-    },
-    {
-      name: "Old",
-      data: [15, 10, 25, 18, 24, 15, 12],
+      name: "Users",
+      data: Object.keys(countryCounts).map((country) => ({
+        x: country,
+        y: countryCounts[country],
+      })),
     },
   ];
 
@@ -27,33 +38,27 @@ const ChartSection = () => {
         enabled: false,
       },
     },
-    stroke: {
-      curve: "smooth",
+    plotOptions: {
+      bar: {
+        horizontal: true,
+      },
     },
     xaxis: {
-      categories: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-      ],
+      categories: Object.keys(countryCounts),
       labels: {
         style: {
-          colors: theme === "dark" ? "#FFFFFF" : "#000000", // White for dark mode, black for light mode
+          colors: theme === "dark" ? "#FFFFFF" : "#000000",
         },
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: theme === "dark" ? "#FFFFFF" : "#000000", // White for dark mode, black for light mode
+          colors: theme === "dark" ? "#FFFFFF" : "#000000",
         },
       },
     },
-    colors: ["#A155B9", "#3ABAF4"],
+    colors: ["#A155B9"],
     dataLabels: {
       enabled: false,
     },
@@ -61,24 +66,23 @@ const ChartSection = () => {
       position: "top",
       horizontalAlign: "right",
       labels: {
-        colors: theme === "dark" ? "#FFFFFF" : "#000000", // White for dark mode, black for light mode
+        colors: theme === "dark" ? "#FFFFFF" : "#000000",
       },
-      containerMargin: {
-        top: 10, // Add margin to the top of the legend
-        left: 0,
-        right: 0,
-        bottom: 0,
-      },
-      itemMargin: {
-        horizontal: 10, // Horizontal gap between legend items
-        vertical: 5, // Vertical gap between legend items
-      },
-      offsetX: 10, // Additional horizontal padding
-      offsetY: 5, // Additional vertical padding
     },
     grid: {
       show: true,
-      borderColor: theme === "dark" ? "#333333" : "#f1f1f1", // Darker grid lines for dark mode
+      borderColor: theme === "dark" ? "#333333" : "#f1f1f1",
+    },
+    tooltip: {
+      theme: theme === "dark" ? "dark" : "light",
+      style: {
+        fontSize: "14px",
+        fontFamily: "Helvetica, Arial, sans-serif",
+        color: theme === "dark" ? "#FFFFFF" : "#000000",
+      },
+      background: {
+        color: theme === "dark" ? "#333333" : "#FFFFFF",
+      },
     },
     responsive: [
       {
@@ -99,11 +103,6 @@ const ChartSection = () => {
           chart: {
             height: 250,
           },
-          xaxis: {
-            labels: {
-              show: true,
-            },
-          },
         },
       },
       {
@@ -114,16 +113,6 @@ const ChartSection = () => {
           },
           legend: {
             fontSize: "12px",
-          },
-          xaxis: {
-            labels: {
-              show: false,
-            },
-          },
-          yaxis: {
-            labels: {
-              show: false,
-            },
           },
         },
       },
@@ -150,7 +139,7 @@ const ChartSection = () => {
         </div> */}
       </div>
 
-      <div className="p-4 rounded-md">
+      <div className="p-4 rounded-md ">
         <ReactApexChart
           options={options}
           series={series}

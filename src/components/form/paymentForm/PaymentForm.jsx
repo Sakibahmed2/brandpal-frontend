@@ -103,10 +103,10 @@ const PaymentForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen p-10">
+    <div className="flex justify-center items-center h-screen p-10 ">
       <form
         onSubmit={handleSubmit}
-        className=" mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg"
+        className=" mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg"
       >
         <h2 className="text-2xl font-semibold mb-4 text-center dark:text-gray-300">
           Complete Your Payment
@@ -122,7 +122,7 @@ const PaymentForm = () => {
                 style: {
                   base: {
                     fontSize: "16px",
-                    color: "#424770",
+                    color: "#aab7c4",
                     "::placeholder": {
                       color: "#aab7c4",
                     },

@@ -8,6 +8,7 @@ import contentWriting from "@/assets/icons/content-writing.svg";
 import webDevelopment from "@/assets/icons/web-development.svg";
 import Image from "next/image";
 import { Pencil, Trash } from "lucide-react";
+import Link from "next/link";
 
 const services = [
   {
@@ -83,7 +84,9 @@ const DashboardServicesPage = () => {
     <div className="mt-5 h-screen mx-5 lg:mx-0">
       <div className="flex justify-between items-center dark:bg-gray-900 bg-gray-50 p-5 rounded-md">
         <p className="text-xl lg:text-2xl">Services</p>
-        <button className="custom-dashboard-btn">Add service</button>
+        <Link href={"/dashboard/admin/services/add-service"}>
+          <button className="custom-dashboard-btn">Add service</button>
+        </Link>
       </div>
 
       <div className="dark:bg-gray-900 bg-gray-50 p-5 mt-5 rounded-lg ">

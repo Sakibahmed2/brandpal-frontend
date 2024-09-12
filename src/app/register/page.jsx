@@ -7,12 +7,22 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useCreateUserMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
+import Select from "react-select";
+import countryList from "react-select-country-list";
+import { useMemo, useState } from "react";
 
 const RegisterPage = () => {
   const [addUser] = useCreateUserMutation();
   const router = useRouter();
 
-  // handle form submission
+  const [country, setCountry] = useState("");
+  const options = useMemo(() => countryList().getData(), []);
+
+  const changeHandler = (value) => {
+    setCountry(value);
+  };
+
+  // // handle form submission
   const handleSubmit = async (e) => {
     const toastId = toast.loading("Please wait...");
     e.preventDefault();
@@ -21,7 +31,7 @@ const RegisterPage = () => {
       name: e.target.name.value,
       email: e.target.email.value,
       password: e.target.password.value,
-      dateOfBirth: e.target.dateOfBirth.value,
+      country: country.label,
     };
 
     try {
@@ -93,14 +103,12 @@ const RegisterPage = () => {
 
               <div className="form-control mb-4">
                 <label className="label">
-                  <span className="label-text">Date of Birth</span>
+                  <span className="label-text">Choose your country</span>
                 </label>
-                <input
-                  type="text"
-                  name="dateOfBirth"
-                  className="input input-bordered w-full"
-                  placeholder="YYYY-MM-DD"
-                  pattern="\d{4}-\d{2}-\d{2}"
+                <Select
+                  options={options}
+                  value={country}
+                  onChange={changeHandler}
                 />
               </div>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
 import { ChartColumnDecreasing, ChartPie, File } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -10,7 +11,7 @@ const ReportsPage = () => {
   const { theme } = useTheme();
   const { data, isLoading } = useGetAllTransactionsQuery({});
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingPage />;
 
   const series = [
     {

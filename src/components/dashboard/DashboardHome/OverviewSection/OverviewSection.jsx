@@ -1,3 +1,4 @@
+import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { getUserInfo } from "@/utils/getUserInfo";
 import {
@@ -14,7 +15,7 @@ const OverviewSection = () => {
   const userInfo = getUserInfo();
   const { data, isLoading } = useGetSingleUserQuery(userInfo?.id);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingPage />;
 
   return (
     <div className="dark:bg-gray-900 bg-gray-50 py-10 px-5 mx-4 lg:mx-0 mt-4 lg:mt-0 rounded-t-xl">

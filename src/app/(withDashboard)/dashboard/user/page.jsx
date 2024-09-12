@@ -11,6 +11,8 @@ import payPerClick from "@/assets/icons/pay-per-click.svg";
 import contentWriting from "@/assets/icons/content-writing.svg";
 import webDevelopment from "@/assets/icons/web-development.svg";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import LoadingPage from "@/components/ui/LoadingPage";
+import cn from "@/libs/cn";
 
 const services = [
   {
@@ -108,10 +110,12 @@ const UserDashboardPage = () => {
 
   const { data: userData } = useGetSingleUserQuery(userInfo?.id);
 
+  console.log(data?.data);
+
   const { transactionId, email, price, serviceName, status, date } =
     data?.data || {};
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingPage />;
 
   // service end month
   const getServiceEndTime = (serviceTitle) => {
@@ -158,7 +162,7 @@ const UserDashboardPage = () => {
               Recent Activity
             </h2>
 
-            {data?.data?.length === null ? (
+            {data?.data === null ? (
               <li className="flex justify-between items-center border-b pb-2 border-gray-500">
                 <p className="font-semibold">
                   <span className="text-primary">No recent activity</span>
@@ -186,11 +190,7 @@ const UserDashboardPage = () => {
                     <div>
                       <span
                         className={
-                          status === "completed"
-                            ? "text-sky-500"
-                            : status === "ongoing"
-                            ? "text-green-500"
-                            : "text-error"
+                          status === "success" ? "text-green-500" : "text-error"
                         }
                       >
                         {status}
@@ -201,7 +201,12 @@ const UserDashboardPage = () => {
                     </div>
                   </li>
                 ))}
-                <li className="flex justify-between items-center pt-4">
+                <li
+                  className={cn(
+                    "flex justify-between items-center pt-4",
+                    data?.data === null ? "hidden" : ""
+                  )}
+                >
                   <div>
                     <p className="font-semibold">Total Price</p>
                     <span className="dark:text-gray-300 text-gray-500">

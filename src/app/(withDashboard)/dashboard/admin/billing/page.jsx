@@ -1,11 +1,12 @@
 "use client";
 
+import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
 
 const AdminBillingDashboard = () => {
   const { data, isLoading } = useGetAllTransactionsQuery({});
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingPage />;
 
   // Sample billing data for users
   const billingData = [

@@ -9,7 +9,7 @@ import Container from "@/components/ui/Container";
 import { useLoginUserMutation } from "@/redux/api/authApi";
 import { toast } from "sonner";
 import { setUserInfo } from "@/utils/local-storage";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [loginUser] = useLoginUserMutation();
@@ -39,8 +39,8 @@ const LoginPage = () => {
 
   return (
     <div className="bg-zinc-100 h-screen flex justify-center items-center ">
-      <Container className="bg-white p-5 rounded-md shadow-md mx-4 lg:mx-0">
-        <div className="lg:flex justify-between items-center w-full ">
+      <Container className="bg-white p-5 rounded-md shadow-md mx-4 lg:mx-0 w-full max-w-[900px]">
+        <div className="lg:flex justify-between items-center w-full">
           <div className="lg:w-1/2 ">
             <form
               onSubmit={handleSubmit}

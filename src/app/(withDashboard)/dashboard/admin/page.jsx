@@ -2,7 +2,9 @@
 
 import ChartSection from "@/components/dashboard/DashboardHome/ChartSection/ChartSection";
 import OverviewSection from "@/components/dashboard/DashboardHome/OverviewSection/OverviewSection";
+import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
+import Link from "next/link";
 
 const transactionsData = [
   {
@@ -40,7 +42,7 @@ const transactionsData = [
 const DashboardHomePage = () => {
   const { data, isLoading } = useGetAllTransactionsQuery({});
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingPage />;
 
   return (
     <div className=" mt-0 lg:mt-5">
@@ -55,7 +57,7 @@ const DashboardHomePage = () => {
           <hr className="border-gray-500 " />
 
           <div className="mt-4 space-y-5">
-            {data?.data.map((transaction) => (
+            {data?.data.slice(0, 4).map((transaction) => (
               <div
                 key={transaction._id}
                 className="flex justify-between items-center"
@@ -69,6 +71,11 @@ const DashboardHomePage = () => {
                 <p>$ {transaction.price}</p>
               </div>
             ))}
+            <Link href={"/dashboard/admin/billing"}>
+              <button className="custom-outline-btn bg-sky-50 dark:bg-sky-400 hover:bg-sky-500 border-sky-500 mt-4">
+                View all
+              </button>
+            </Link>
           </div>
         </div>
       </div>

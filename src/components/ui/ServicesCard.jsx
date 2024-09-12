@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import Swal from "sweetalert2";
 
 const ServicesCard = ({ service }) => {
   const dispatch = useDispatch();
@@ -15,28 +14,13 @@ const ServicesCard = ({ service }) => {
   const myOrder = useSelector((state) => state.orders.orders);
 
   const handleAddOrder = () => {
-    if (!userInfo?.id) {
-      Swal.fire({
-        title: "Please login",
-        text: "You wan to login first to order this product",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Login",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          return router.push("/login");
-        }
-      });
-    } else if (
+    if (
       service.id ===
       myOrder.find((order) => order.serviceId === service.id)?.serviceId
     ) {
       toast.error("Service already added to cart");
     } else {
       const order = {
-        userId: userInfo.id,
         serviceId: service.id,
         title: service.title,
         price: service.price,
