@@ -11,16 +11,16 @@ const ServicesCard = ({ service }) => {
 
   const handleAddOrder = () => {
     if (
-      service.id ===
-      myOrder.find((order) => order.serviceId === service.id)?.serviceId
+      service._id ===
+      myOrder.find((order) => order.serviceId === service._id)?.serviceId
     ) {
       toast.error("Service already added to cart");
     } else {
       const order = {
-        serviceId: service.id,
-        title: service.title,
+        serviceId: service._id,
+        name: service.name,
         price: service.price,
-        time: service.time,
+        time: service.duration,
         description: service.description,
       };
       dispatch(addOrder(order));

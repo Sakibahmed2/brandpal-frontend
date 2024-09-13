@@ -20,8 +20,11 @@ const Navbar = () => {
     { title: "Service", path: "/service" },
     { title: "About us", path: "/about" },
     { title: "Contact", path: "/contact" },
-    { title: "Cart", path: "/cart" },
   ];
+
+  if (userRole === "user") {
+    navItems.push({ title: "Cart", path: "/cart" });
+  }
 
   if (userRole === "admin" || userRole === "user") {
     navItems.push({ title: "Dashboard", path: `/dashboard/${userRole}` });

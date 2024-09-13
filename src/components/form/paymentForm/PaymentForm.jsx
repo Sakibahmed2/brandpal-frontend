@@ -87,7 +87,7 @@ const PaymentForm = () => {
           email: userInfo.email,
           price: totalPrice,
           date: new Date(),
-          serviceName: myOrder.map((item) => item.title),
+          serviceName: myOrder.map((item) => item.name),
           serviceId: myOrder.map((item) => item.serviceId),
           status: "pending",
         };

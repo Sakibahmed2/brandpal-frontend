@@ -1,15 +1,10 @@
 "use client";
 
-import LoadingPage from "@/components/ui/LoadingPage";
 import SalesReportsChart from "@/components/ui/SalesReportsChart";
-import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
+import TransactionsTable from "@/components/ui/TransactionsTable";
 import { ChartColumnDecreasing, ChartPie, File } from "lucide-react";
 
 const ReportsPage = () => {
-  const { data, isLoading } = useGetAllTransactionsQuery({});
-
-  if (isLoading) return <LoadingPage />;
-
   return (
     <div className="mt-5 min-h-screen mx-5 lg:mx-0">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -48,45 +43,7 @@ const ReportsPage = () => {
       <SalesReportsChart />
 
       {/* Table */}
-      <div className="mt-5 dark:bg-gray-900 bg-gray-50 p-5 ">
-        <div className=" overflow-x-auto">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th className="dark:text-gray-400">Date</th>
-                <th className="dark:text-gray-400">Email</th>
-                <th className="dark:text-gray-400">Amount</th>
-                <th className="dark:text-gray-400">Status</th>
-                <th className="dark:text-gray-400">Transaction ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data?.data.map((billing) => (
-                <tr key={billing._id}>
-                  <td className="px-4 py-2">
-                    {new Date(billing.date).toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-2">{billing.email}</td>
-                  <td className="px-4 py-2">{`$${billing.price}`}</td>
-
-                  <td className="px-4 py-2">
-                    <span
-                      className={`badge ${
-                        billing.status === "ongoing"
-                          ? "badge-success"
-                          : "badge-error"
-                      }`}
-                    >
-                      {billing.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-2">{billing.transactionId}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <TransactionsTable />
     </div>
   );
 };

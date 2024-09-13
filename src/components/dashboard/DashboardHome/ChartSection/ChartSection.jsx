@@ -58,7 +58,7 @@ const ChartSection = () => {
         },
       },
     },
-    colors: ["#A155B9"],
+    colors: ["#38bdf8"],
     dataLabels: {
       enabled: false,
     },

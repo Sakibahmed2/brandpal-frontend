@@ -40,8 +40,8 @@ const MyOrdersPage = () => {
                 <tbody>
                   {myOrder.map((order, index) => (
                     <tr key={index} className="border-b">
-                      <td className="px-4 py-2">{order.title}</td>
-                      <td className="px-4 py-2">{order.time}</td>
+                      <td className="px-4 py-2">{order.name}</td>
+                      <td className="px-4 py-2">{order.duration}</td>
                       <td className="px-4 py-2">${order.price}</td>
                     </tr>
                   ))}

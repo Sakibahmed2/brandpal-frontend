@@ -8,6 +8,7 @@ const paymentApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["payment"],
     }),
 
     confirmPayment: builder.mutation({
@@ -16,17 +17,27 @@ const paymentApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["payment"],
     }),
 
     getAllTransactions: builder.query({
       query: () => ({
         url: "/payment/transactions",
       }),
+      providesTags: ["payment"],
     }),
 
     getSingleTransaction: builder.query({
       query: ({ email }) => ({
         url: `/payment/transactions/${email}`,
+      }),
+      providesTags: ["payment"],
+    }),
+
+    updateToSuccess: builder.mutation({
+      query: (transactionsId) => ({
+        url: `/payment/transactions/update-to-success/${transactionsId}`,
+        method: "PUT",
       }),
     }),
   }),
@@ -37,4 +48,5 @@ export const {
   useConfirmPaymentMutation,
   useGetAllTransactionsQuery,
   useGetSingleTransactionQuery,
+  useUpdateToSuccessMutation,
 } = paymentApi;

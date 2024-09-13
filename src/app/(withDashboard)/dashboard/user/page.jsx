@@ -13,87 +13,7 @@ import webDevelopment from "@/assets/icons/web-development.svg";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import LoadingPage from "@/components/ui/LoadingPage";
 import cn from "@/libs/cn";
-
-const services = [
-  {
-    id: 1,
-    icon: seo,
-    title: "Search Engine Optimization (SEO)",
-    description: "Boost your online presence with our expert SEO services.",
-    features: [
-      "Keyword Research & Strategy",
-      "On-Page & Off-Page Optimization",
-      "Technical & Local SEO",
-    ],
-    time: "6 months",
-    price: 1500,
-  },
-  {
-    id: 2,
-    icon: payPerClick,
-    title: "Pay-Per-Click Advertising (PPC)",
-    description: "Maximize your ROI with our targeted PPC campaigns.",
-    features: [
-      "Campaign Strategy & Management",
-      "Keyword Targeting",
-      "A/B Testing & Conversion Tracking",
-    ],
-    time: "3 months",
-    price: 1200,
-  },
-  {
-    id: 3,
-    icon: socialMediaMarketing,
-    title: "Social Media Marketing",
-    description: "Engage your audience and build brand loyalty.",
-    features: [
-      "Social Media Strategy Development",
-      "Content Creation & Curation",
-      "Community Management",
-    ],
-    time: "6 months",
-    price: 900,
-  },
-  {
-    id: 4,
-    icon: contentWriting,
-    title: "Content Marketing",
-    description: "Tell your brand’s story with high-quality content.",
-    features: [
-      "Content Strategy",
-      "Blog Writing & Visual Content",
-      "Email Marketing Campaigns",
-    ],
-    time: "1 month",
-    price: 500,
-  },
-  {
-    id: 5,
-    icon: emailMarketing,
-    title: "Email Marketing",
-    description: "Nurture leads and convert them into loyal customers.",
-    features: [
-      "Email Campaign Strategy",
-      "Template Design & Automation",
-      "Segmentation & Performance Analytics",
-    ],
-    time: "2 months",
-    price: 750,
-  },
-  {
-    id: 6,
-    icon: webDevelopment,
-    title: "Web Design & Development",
-    description: "Create a responsive, user-friendly website for your brand.",
-    features: [
-      "Custom Web Design",
-      "Responsive Development",
-      "UX/UI Design & E-commerce Solutions",
-    ],
-    time: "3 months",
-    price: 2500,
-  },
-];
+import { useGetAllServicesQuery } from "@/redux/api/serviceApi";
 
 const addMonthsToDate = (date, months) => {
   const newDate = new Date(date);
@@ -102,18 +22,20 @@ const addMonthsToDate = (date, months) => {
 };
 
 const UserDashboardPage = () => {
+  const { data: servicesData } = useGetAllServicesQuery({});
   const userInfo = getUserInfo();
+
+  const services = servicesData?.data || [];
 
   const { data, isLoading } = useGetSingleTransactionQuery({
     email: userInfo.email,
   });
 
+  console.log(data);
+
   const { data: userData } = useGetSingleUserQuery(userInfo?.id);
 
-  console.log(data?.data);
-
-  const { transactionId, email, price, serviceName, status, date } =
-    data?.data || {};
+  const { transactionId, price, serviceName, status, date } = data?.data || {};
 
   if (isLoading) return <LoadingPage />;
 
@@ -155,71 +77,60 @@ const UserDashboardPage = () => {
       </div>
 
       <div className="dark:bg-gray-900 bg-gray-50 p-3 lg:p-5 mt-5 lg:mx-0 mx-4">
-        {/* Recent Activity */}
-        <div className=" col-span-1 md:col-span-2 lg:col-span-3 dark:bg-gray-800 bg-white mt-4">
-          <div className="p-3 lg:p-5">
-            <h2 className=" text-secondary text-left lg:text-2xl mb-4 font-semibold">
-              Recent Activity
-            </h2>
-
-            {data?.data === null ? (
-              <li className="flex justify-between items-center border-b pb-2 border-gray-500">
-                <p className="font-semibold">
-                  <span className="text-primary">No recent activity</span>
-                </p>
-              </li>
-            ) : (
-              ""
-            )}
-
-            {data?.data?.length !== 0 && (
-              <ul className="space-y-4">
-                {serviceName?.map((service, index) => (
-                  <li
-                    key={index}
-                    className="flex justify-between items-center border-b pb-2"
-                  >
-                    <div>
-                      <p className="font-semibold">
-                        <span className="text-primary">{service}</span>
-                      </p>
-                      <span className="dark:text-gray-300 text-gray-500 lg:text-sm text-xs">
-                        Transaction ID: {transactionId}
-                      </span>
-                    </div>
-                    <div>
-                      <span
-                        className={
-                          status === "success" ? "text-green-500" : "text-error"
-                        }
+        {/* Recent Activity Table */}
+        <div className="dark:bg-gray-800 bg-white p-5 mt-4">
+          <h2 className="text-secondary text-left lg:text-2xl mb-4 font-semibold">
+            Recent Transactions
+          </h2>
+          {isLoading ? (
+            <LoadingPage />
+          ) : data?.data?.length === 0 ? (
+            <p>No recent transactions</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full table-auto">
+                <thead>
+                  <tr className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300">
+                    <th className="px-4 py-2 text-left">Service Name</th>
+                    <th className="px-4 py-2 text-left">Transaction ID</th>
+                    <th className="px-4 py-2 text-left">Status</th>
+                    <th className="px-4 py-2 text-left">Date</th>
+                    <th className="px-4 py-2 text-left">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data?.data.map((transaction, index) => (
+                    <tr
+                      key={index}
+                      className="border-b dark:border-gray-600 bg-white dark:bg-gray-800"
+                    >
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
+                        {transaction.serviceName.join(", ")}
+                      </td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
+                        {transaction.transactionId}
+                      </td>
+                      <td
+                        className={`px-4 py-2 ${
+                          transaction.status === "success"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
                       >
-                        {status}
-                      </span>
-                      <p className="lg:text-sm text-xs">
-                        End Time: {getServiceEndTime(service)}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-                <li
-                  className={cn(
-                    "flex justify-between items-center pt-4",
-                    data?.data === null ? "hidden" : ""
-                  )}
-                >
-                  <div>
-                    <p className="font-semibold">Total Price</p>
-                    <span className="dark:text-gray-300 text-gray-500">
-                      ${price}
-                    </span>
-                  </div>
-                  <span className="dark:text-gray-300 text-gray-500">
-                    {new Date(date).toLocaleDateString()}
-                  </span>
-                </li>
-              </ul>
-            )}
-          </div>
+                        {transaction.status}
+                      </td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
+                        {new Date(transaction.date).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
+                        ${transaction.price}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </div>
