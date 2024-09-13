@@ -1,16 +1,12 @@
 "use client";
 
 import { addOrder } from "@/redux/features/orderSlice";
-import { getUserInfo } from "@/utils/getUserInfo";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const ServicesCard = ({ service }) => {
   const dispatch = useDispatch();
-  const userInfo = getUserInfo();
-  const router = useRouter();
   const myOrder = useSelector((state) => state.orders.orders);
 
   const handleAddOrder = () => {
@@ -37,12 +33,19 @@ const ServicesCard = ({ service }) => {
     <div className="rounded-md bg-base-100 shadow-sm hover:shadow-lg transition-shadow duration-300 border">
       <div className="card-body">
         <div className="mx-auto lg:mx-0 mb-3 p-2 rounded-md w-20 flex justify-center items-center bg-secondary/10">
-          <Image src={service.icon} alt="service icon" className="w-12" />
+          <Image
+            src={service.icon}
+            width={60}
+            height={60}
+            alt="service icon"
+            className="w-12"
+            unoptimized
+          />
         </div>
         <hr />
 
         <h2 className="card-title text-secondary text-center">
-          {service.title}
+          {service.name}
         </h2>
         <p className="text-gray-500">{service.description}</p>
         <ul className="list-disc pl-5 mt-3 text-gray-400">

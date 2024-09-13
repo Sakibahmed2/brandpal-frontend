@@ -53,12 +53,6 @@ const Sidebar = () => {
         icon: File,
       },
       {
-        id: 4,
-        label: "Offer",
-        path: "/dashboard/admin/offer",
-        icon: BadgeDollarSign,
-      },
-      {
         id: 5,
         label: "Billing",
         path: "/dashboard/admin/billing",

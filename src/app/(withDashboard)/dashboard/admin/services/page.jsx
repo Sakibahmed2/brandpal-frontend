@@ -1,85 +1,34 @@
-import React from "react";
+"use client";
 
-import socialMediaMarketing from "@/assets/icons/social-media-marketing.svg";
-import emailMarketing from "@/assets/icons/email-marketing.svg";
-import seo from "@/assets/icons/SEo.svg";
-import payPerClick from "@/assets/icons/pay-per-click.svg";
-import contentWriting from "@/assets/icons/content-writing.svg";
-import webDevelopment from "@/assets/icons/web-development.svg";
-import Image from "next/image";
+import LoadingPage from "@/components/ui/LoadingPage";
+import {
+  useDeleteServiceMutation,
+  useGetAllServicesQuery,
+} from "@/redux/api/serviceApi";
 import { Pencil, Trash } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-
-const services = [
-  {
-    id: 1,
-    icon: seo,
-    title: "Search Engine Optimization (SEO)",
-    description: "Boost your online presence with our expert SEO services.",
-    features: [
-      "Keyword Research & Strategy",
-      "On-Page & Off-Page Optimization",
-      "Technical & Local SEO",
-    ],
-  },
-  {
-    id: 2,
-    icon: payPerClick,
-    title: "Pay-Per-Click Advertising (PPC)",
-    description: "Maximize your ROI with our targeted PPC campaigns.",
-    features: [
-      "Campaign Strategy & Management",
-      "Keyword Targeting",
-      "A/B Testing & Conversion Tracking",
-    ],
-  },
-  {
-    id: 3,
-    icon: socialMediaMarketing,
-    title: "Social Media Marketing",
-    description: "Engage your audience and build brand loyalty.",
-    features: [
-      "Social Media Strategy Development",
-      "Content Creation & Curation",
-      "Community Management",
-    ],
-  },
-  {
-    id: 4,
-    icon: contentWriting,
-    title: "Content Marketing",
-    description: "Tell your brands story with high-quality content.",
-    features: [
-      "Content Strategy",
-      "Blog Writing & Visual Content",
-      "Email Marketing Campaigns",
-    ],
-  },
-  {
-    id: 5,
-    icon: emailMarketing,
-    title: "Email Marketing",
-    description: "Nurture leads and convert them into loyal customers.",
-    features: [
-      "Email Campaign Strategy",
-      "Template Design & Automation",
-      "Segmentation & Performance Analytics",
-    ],
-  },
-  {
-    id: 6,
-    icon: webDevelopment,
-    title: "Web Design & Development",
-    description: "Create a responsive, user-friendly website for your brand.",
-    features: [
-      "Custom Web Design",
-      "Responsive Development",
-      "UX/UI Design & E-commerce Solutions",
-    ],
-  },
-];
+import { toast } from "sonner";
 
 const DashboardServicesPage = () => {
+  const { data, isLoading, refetch } = useGetAllServicesQuery({});
+  const [deleteService] = useDeleteServiceMutation();
+
+  if (isLoading) return <LoadingPage />;
+
+  const handleDelete = async (id) => {
+    const toastId = toast.loading("Deleting service...");
+    try {
+      const res = await deleteService(id);
+      if (res?.data?.success) {
+        toast.success(res?.data?.message, { id: toastId });
+        refetch();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="mt-5 h-screen mx-5 lg:mx-0">
       <div className="flex justify-between items-center dark:bg-gray-900 bg-gray-50 p-5 rounded-md">
@@ -93,7 +42,7 @@ const DashboardServicesPage = () => {
         <div className="overflow-x-auto ">
           <table className="table   text-center ">
             {/* head */}
-            <thead className="text-white/80">
+            <thead className="dark:text-white/80">
               <tr>
                 <th>#</th>
                 <th>Image</th>
@@ -103,27 +52,33 @@ const DashboardServicesPage = () => {
               </tr>
             </thead>
             <tbody>
-              {services.map((service, index) => (
-                <tr key={service.id}>
+              {data?.data.map((service, index) => (
+                <tr key={service._id}>
                   <th>{index + 1}</th>
                   <th>
                     <div className="bg-sky-400 text-white flex justify-center items-center py-2  rounded-md">
                       <Image
                         src={service.icon}
-                        alt={service.title}
+                        alt={service.name}
                         height={24}
                         width={24}
+                        unoptimized
                       />
                     </div>
                   </th>
-                  <td>{service.title}</td>
+                  <td>{service.name}</td>
 
                   <td>
                     <div className="flex justify-center items-center gap-2">
-                      <button className="bg-blue-500 p-2 rounded-sm">
-                        <Pencil size={18} />
-                      </button>
-                      <button className="bg-red-500 p-2 rounded-sm ">
+                      <Link href={`/dashboard/admin/services/${service?._id}`}>
+                        <button className="bg-blue-500 p-2 rounded-sm">
+                          <Pencil size={18} />
+                        </button>
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(service?._id)}
+                        className="bg-red-500 p-2 rounded-sm "
+                      >
                         <Trash size={18} />
                       </button>
                     </div>

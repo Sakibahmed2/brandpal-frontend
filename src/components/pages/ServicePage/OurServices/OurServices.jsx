@@ -1,3 +1,5 @@
+"use client";
+
 import SectionTitle from "@/components/ui/SectionTitle";
 import ServicesCard from "@/components/ui/ServicesCard";
 import React from "react";
@@ -8,6 +10,8 @@ import seo from "@/assets/icons/SEo.svg";
 import payPerClick from "@/assets/icons/pay-per-click.svg";
 import contentWriting from "@/assets/icons/content-writing.svg";
 import webDevelopment from "@/assets/icons/web-development.svg";
+import { useGetAllServicesQuery } from "@/redux/api/serviceApi";
+import LoadingPage from "@/components/ui/LoadingPage";
 
 const services = [
   {
@@ -91,6 +95,12 @@ const services = [
 ];
 
 const OurServices = () => {
+  const { data, isLoading } = useGetAllServicesQuery({});
+
+  if (isLoading) return <LoadingPage />;
+
+  const serviceData = data?.data;
+
   return (
     <div className="mt-20">
       <div className="text-center">
@@ -101,7 +111,7 @@ const OurServices = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-        {services.map((service) => (
+        {serviceData.map((service) => (
           <ServicesCard key={service.id} service={service} />
         ))}
       </div>

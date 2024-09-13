@@ -1,20 +1,30 @@
 "use client";
 
-import { useCreateServiceMutation } from "@/redux/api/serviceApi";
+import LoadingPage from "@/components/ui/LoadingPage";
+import {
+  useGetSingleServiceQuery,
+  useUpdateServiceMutation,
+} from "@/redux/api/serviceApi";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
-const AddServicePage = () => {
-  const [createService] = useCreateServiceMutation();
+const UpdateServicePage = ({ params }) => {
+  const serviceId = params.updateService;
   const router = useRouter();
+  const { data, isLoading } = useGetSingleServiceQuery(serviceId);
+  const [updateService] = useUpdateServiceMutation();
+
+  if (isLoading) return <LoadingPage />;
+
+  const serviceData = data?.data;
 
   const handleSubmit = async (e) => {
     const toastId = toast.loading("Creating service...");
     e.preventDefault();
     const form = e.target;
 
-    const serviceData = {
+    const updatedData = {
       name: form.name.value,
       icon: form.icon.value,
       features: form.features.value.split(","),
@@ -24,10 +34,9 @@ const AddServicePage = () => {
     };
 
     try {
-      const res = await createService(serviceData).unwrap();
-      console.log(res);
-      if (res?.success) {
-        toast.success(res?.message, { id: toastId });
+      const res = await updateService({ id: serviceId, updatedData });
+      if (res?.data?.success) {
+        toast.success(res?.data?.message, { id: toastId });
         router.push("/dashboard/admin/services");
       }
     } catch (err) {
@@ -39,7 +48,7 @@ const AddServicePage = () => {
     <div className="h-screen lg:flex justify-center items-center mt-5 lg:mt-0 mx-5 lg:mx-0">
       <div className="bg-gray-50 dark:bg-gray-900 p-5 lg:p-10 rounded-md">
         <h1 className="text-2xl lg:text-3xl font-semibold border-b mb-10 dark:border-gray-400 pb-4 ">
-          Add Service
+          Update Service
         </h1>
 
         <form onSubmit={handleSubmit} className="w-full lg:w-[700px]">
@@ -56,7 +65,7 @@ const AddServicePage = () => {
                   placeholder="Service name"
                   name="name"
                   className="input input-bordered bg-transparent w-full dark:border-gray-200"
-                  required
+                  defaultValue={serviceData?.name}
                 />
               </label>
             </div>
@@ -73,7 +82,7 @@ const AddServicePage = () => {
                   placeholder="Service name"
                   name="icon"
                   className="input input-bordered bg-transparent w-full dark:border-gray-200"
-                  required
+                  defaultValue={serviceData?.icon}
                 />
               </label>
             </div>
@@ -92,7 +101,7 @@ const AddServicePage = () => {
                   placeholder="Duration in months"
                   name="duration"
                   className="input input-bordered bg-transparent w-full dark:border-gray-200"
-                  required
+                  defaultValue={serviceData?.duration}
                 />
               </label>
             </div>
@@ -107,7 +116,7 @@ const AddServicePage = () => {
                   placeholder="Price"
                   name="price"
                   className="input input-bordered bg-transparent w-full dark:border-gray-200"
-                  required
+                  defaultValue={serviceData?.price}
                 />
               </label>
             </div>
@@ -125,7 +134,7 @@ const AddServicePage = () => {
                 placeholder="Features"
                 name="features"
                 className="input input-bordered bg-transparent w-full dark:border-gray-200"
-                required
+                defaultValue={serviceData?.features.join(",")}
               />
             </label>
           </div>
@@ -141,7 +150,7 @@ const AddServicePage = () => {
                 className="textarea textarea-bordered bg-transparent dark:border-gray-300 h-24"
                 name="description"
                 placeholder="Description"
-                required
+                defaultValue={serviceData?.description}
               ></textarea>
             </label>
           </div>
@@ -150,7 +159,7 @@ const AddServicePage = () => {
             type="submit"
             className="custom-outline-btn w-full bg-sky-50 dark:bg-sky-400 hover:bg-sky-500 border-sky-500 mt-5"
           >
-            Add service
+            Update service
           </button>
         </form>
       </div>
@@ -158,4 +167,4 @@ const AddServicePage = () => {
   );
 };
 
-export default AddServicePage;
+export default UpdateServicePage;

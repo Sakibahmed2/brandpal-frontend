@@ -1,136 +1,14 @@
 "use client";
 
 import LoadingPage from "@/components/ui/LoadingPage";
+import SalesReportsChart from "@/components/ui/SalesReportsChart";
 import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
 import { ChartColumnDecreasing, ChartPie, File } from "lucide-react";
-import { useTheme } from "next-themes";
-import React from "react";
-import ApexCharts from "react-apexcharts"; // Ensure you have apexcharts installed
 
 const ReportsPage = () => {
-  const { theme } = useTheme();
   const { data, isLoading } = useGetAllTransactionsQuery({});
 
   if (isLoading) return <LoadingPage />;
-
-  const series = [
-    {
-      name: "Young Age",
-      data: [10, 20, 15, 25, 18, 22, 10],
-    },
-    {
-      name: "Old",
-      data: [15, 10, 25, 18, 24, 15, 12],
-    },
-  ];
-
-  const options = {
-    chart: {
-      type: "area",
-      toolbar: {
-        show: false,
-      },
-      zoom: {
-        enabled: false,
-      },
-    },
-    stroke: {
-      curve: "smooth",
-    },
-    xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-      labels: {
-        style: {
-          colors: theme === "dark" ? "#FFFFFF" : "#000000",
-        },
-      },
-    },
-    yaxis: {
-      labels: {
-        style: {
-          colors: theme === "dark" ? "#FFFFFF" : "#000000",
-        },
-      },
-    },
-    colors: ["#6C5DD3", "#FF6A55"],
-    dataLabels: {
-      enabled: false,
-    },
-
-    legend: {
-      position: "top",
-      horizontalAlign: "right",
-      labels: {
-        colors: theme === "dark" ? "#FFFFFF" : "#000000",
-      },
-      containerMargin: {
-        top: 10, // Add margin to the top of the legend
-        left: 0,
-        right: 0,
-        bottom: 0,
-      },
-      itemMargin: {
-        horizontal: 10, // Horizontal gap between legend items
-        vertical: 5, // Vertical gap between legend items
-      },
-      offsetX: 10, // Additional horizontal padding
-      offsetY: 5, // Additional vertical padding
-    },
-
-    grid: {
-      show: true,
-      borderColor: "#f1f1f1",
-    },
-
-    responsive: [
-      {
-        breakpoint: 1024,
-        options: {
-          chart: {
-            height: 300,
-          },
-          legend: {
-            position: "bottom",
-            horizontalAlign: "center",
-          },
-        },
-      },
-      {
-        breakpoint: 768,
-        options: {
-          chart: {
-            height: 250,
-          },
-          xaxis: {
-            labels: {
-              show: true,
-            },
-          },
-        },
-      },
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            height: 200,
-          },
-          legend: {
-            fontSize: "12px",
-          },
-          xaxis: {
-            labels: {
-              show: false,
-            },
-          },
-          yaxis: {
-            labels: {
-              show: false,
-            },
-          },
-        },
-      },
-    ],
-  };
 
   return (
     <div className="mt-5 min-h-screen mx-5 lg:mx-0">
@@ -167,15 +45,7 @@ const ReportsPage = () => {
       </div>
 
       {/* Charts */}
-      <div className="dark:bg-gray-900 bg-gray-50 mt-5 p-5 rounded-lg ">
-        <h3 className="text-xl lg:text-2xl mb-4">Customer Waves</h3>
-        <ApexCharts
-          options={options}
-          series={series}
-          type="area"
-          height={350}
-        />
-      </div>
+      <SalesReportsChart />
 
       {/* Table */}
       <div className="mt-5 dark:bg-gray-900 bg-gray-50 p-5 ">
