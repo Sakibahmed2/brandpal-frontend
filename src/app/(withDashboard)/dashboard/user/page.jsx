@@ -4,51 +4,19 @@ import { useGetSingleTransactionQuery } from "@/redux/api/paymentApi";
 import { getUserInfo } from "@/utils/getUserInfo";
 import { Bell, CircleUserRound, Mail } from "lucide-react";
 
-import socialMediaMarketing from "@/assets/icons/social-media-marketing.svg";
-import emailMarketing from "@/assets/icons/email-marketing.svg";
-import seo from "@/assets/icons/SEo.svg";
-import payPerClick from "@/assets/icons/pay-per-click.svg";
-import contentWriting from "@/assets/icons/content-writing.svg";
-import webDevelopment from "@/assets/icons/web-development.svg";
-import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import LoadingPage from "@/components/ui/LoadingPage";
-import cn from "@/libs/cn";
-import { useGetAllServicesQuery } from "@/redux/api/serviceApi";
-
-const addMonthsToDate = (date, months) => {
-  const newDate = new Date(date);
-  newDate.setMonth(newDate.getMonth() + months);
-  return newDate;
-};
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
 const UserDashboardPage = () => {
-  const { data: servicesData } = useGetAllServicesQuery({});
   const userInfo = getUserInfo();
-
-  const services = servicesData?.data || [];
 
   const { data, isLoading } = useGetSingleTransactionQuery({
     email: userInfo.email,
   });
 
-  console.log(data);
-
   const { data: userData } = useGetSingleUserQuery(userInfo?.id);
 
-  const { transactionId, price, serviceName, status, date } = data?.data || {};
-
   if (isLoading) return <LoadingPage />;
-
-  // service end month
-  const getServiceEndTime = (serviceTitle) => {
-    const service = services.find((s) => s.title === serviceTitle);
-    if (service && date) {
-      const months = parseInt(service.time.split(" ")[0], 10);
-      const endDate = addMonthsToDate(date, months);
-      return endDate.toLocaleDateString();
-    }
-    return "N/A";
-  };
 
   return (
     <div className="min-h-screen">
@@ -105,7 +73,7 @@ const UserDashboardPage = () => {
                       className="border-b dark:border-gray-600 bg-white dark:bg-gray-800"
                     >
                       <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
-                        {transaction.serviceName.join(", ")}
+                        {transaction.serviceName.join(" || ")}
                       </td>
                       <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
                         {transaction.transactionId}
