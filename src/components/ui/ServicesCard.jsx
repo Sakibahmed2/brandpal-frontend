@@ -1,13 +1,27 @@
 "use client";
 
+import cn from "@/libs/cn";
+import {
+  useClaimOfferMutation,
+  useGetSingleUserQuery,
+} from "@/redux/api/userApi";
 import { addOrder } from "@/redux/features/orderSlice";
+import { getUserInfo } from "@/utils/getUserInfo";
+import getOfferValidation from "@/utils/offferValidation";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const ServicesCard = ({ service }) => {
   const dispatch = useDispatch();
   const myOrder = useSelector((state) => state.orders.orders);
+  const [offerValidation, setOfferValidation] = useState("");
+  const userInfo = getUserInfo();
+  const { data } = useGetSingleUserQuery(userInfo?.id);
+  const [claimOffer] = useClaimOfferMutation();
+
+  const userDetails = data?.data;
 
   const handleAddOrder = () => {
     if (
@@ -19,7 +33,7 @@ const ServicesCard = ({ service }) => {
       const order = {
         serviceId: service._id,
         name: service.name,
-        price: service.price,
+        price: service?.offerPrice ? service.offerPrice : service.price,
         time: service.duration,
         description: service.description,
       };
@@ -28,8 +42,35 @@ const ServicesCard = ({ service }) => {
     }
   };
 
+  useEffect(() => {
+    const validateOffer = async () => {
+      if (userDetails?.offer !== "No-offer") {
+        const isOfferValid = getOfferValidation(
+          userDetails?.offerStartDate,
+          userDetails?.offerEndDate
+        );
+
+        if (isOfferValid.isValid) {
+          setOfferValidation(isOfferValid.remainingDays);
+        } else {
+          try {
+            await claimOffer({
+              userId: userDetails?.id,
+              offerName: "No-offer",
+            });
+          } catch (err) {
+            console.error("Error claiming offer:", err);
+          }
+        }
+      }
+    };
+
+    if (userDetails) {
+      validateOffer();
+    }
+  }, [userDetails, claimOffer]);
+
   return (
-    // <Link href={`/service/${service.id}`}>
     <div className="rounded-md bg-base-100 shadow-sm hover:shadow-lg transition-shadow duration-300 border">
       <div className="card-body">
         <div className="mx-auto lg:mx-0 mb-3 p-2 rounded-md w-20 flex justify-center items-center bg-secondary/10">
@@ -57,11 +98,41 @@ const ServicesCard = ({ service }) => {
         {/* Service time and price */}
         <div className="mt-4">
           <p className=" font-semibold text-gray-600">
-            Service Time: <span className="text-primary">{service.time}</span>
+            Service Time:{" "}
+            <span className="text-primary">{service.duration}</span>
           </p>
-          <p className="font-semibold text-gray-600">
-            Price: <span className="text-primary">${service.price}</span>
-          </p>
+          <div>
+            <p
+              className={cn(
+                "font-semibold text-gray-600 flex gap-2 my-1",
+                userDetails?.offer === "free-trial" && "line-through"
+              )}
+            >
+              Price:{" "}
+              {!service?.offerPrice ? (
+                <span className="text-primary">${service.price}</span>
+              ) : (
+                <div className="flex gap-4">
+                  <span className="text-red-500 line-through">
+                    ${service.price}
+                  </span>{" "}
+                  <span className="text-primary">${service.offerPrice}</span>
+                </div>
+              )}
+            </p>
+            {userDetails?.offer === "free-trial" && (
+              <p className="font-semibold text-gray-600 mb-1">
+                You have 7 days free trial
+              </p>
+            )}
+          </div>
+
+          {offerValidation > 0 && (
+            <p className="font-semibold text-gray-600">
+              Offer ends in:{" "}
+              <span className="text-primary">{offerValidation} days</span>
+            </p>
+          )}
         </div>
 
         <button
@@ -72,7 +143,6 @@ const ServicesCard = ({ service }) => {
         </button>
       </div>
     </div>
-    // </Link>
   );
 };
 

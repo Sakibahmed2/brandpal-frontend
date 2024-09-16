@@ -5,7 +5,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-[#FDFCFF] py-10">
+    <div className="bg-[#FDFCFF] py-5">
       <Container>
         <div className="md:flex justify-between ">
           <div>
@@ -43,7 +43,9 @@ const Footer = () => {
                   <Link href="/testimony">Our Testimony</Link>
                 </p>
                 <p>Find Marketing</p>
-                <p>About us</p>
+                <p>
+                  <Link href={"/about"}>About us</Link>
+                </p>
               </div>
             </div>
 
@@ -86,6 +88,12 @@ const Footer = () => {
           </div>
         </div>
       </Container>
+      <div>
+        <hr className="border-gray-400 my-5" />
+        <p className="text-center text-gray-400  ">
+          &copy; 2021 Brandpal. All rights reserved.
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,3 @@
-"use client";
-
 import SalesReportsChart from "@/components/ui/SalesReportsChart";
 import TransactionsTable from "@/components/ui/TransactionsTable";
 import { ChartColumnDecreasing, ChartPie, File } from "lucide-react";

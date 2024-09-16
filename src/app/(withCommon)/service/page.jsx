@@ -2,6 +2,7 @@ import ServiceHeader from "@/components/pages/ServicePage/Header/Header";
 import OfferSection from "@/components/pages/ServicePage/OfferSection/OfferSection";
 import OurServices from "@/components/pages/ServicePage/OurServices/OurServices";
 import Container from "@/components/ui/Container";
+import Link from "next/link";
 
 const ServicePage = () => {
   return (
@@ -18,7 +19,9 @@ const ServicePage = () => {
         <p className="text-lg text-gray-600 mb-8">
           Contact us today to learn how we can help you succeed online.
         </p>
-        <button className="custom-primary-btn py-5">Get in Touch</button>
+        <Link href={"/contact"}>
+          <button className="custom-primary-btn py-5">Get in Touch</button>
+        </Link>
       </div>
     </Container>
   );

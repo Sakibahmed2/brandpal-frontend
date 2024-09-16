@@ -2,16 +2,18 @@
 
 import Container from "@/components/ui/Container";
 import cn from "@/libs/cn";
+import { removeOrder } from "@/redux/features/orderSlice";
 import { getUserInfo } from "@/utils/getUserInfo";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const CartPage = () => {
   const userInfo = getUserInfo();
   const router = useRouter();
   const cartItems = useSelector((state) => state.orders.orders);
+  const dispatch = useDispatch();
 
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
 
@@ -40,12 +42,21 @@ const CartPage = () => {
       <div className="py-10 mx-4 lg:mx-0 mt-5 rounded-t-xl">
         <div className="flex flex-col lg:flex-row justify-between items-center border-b mb-10 pb-5">
           <h2 className="text-2xl lg:text-3xl font-semibold">My Cart items</h2>
-          <button
-            onClick={handleProceedToCheckout}
-            className="custom-outline-btn bg-secondary/10 border-secondary hover:bg-secondary lg:mt-0 mt-2"
-          >
-            Proceed to Checkout
-          </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => dispatch(removeOrder())}
+              className="custom-outline-btn bg-red-100 border-red-500 hover:bg-red-500 lg:mt-0 mt-2"
+            >
+              Delete items
+            </button>
+
+            <button
+              onClick={handleProceedToCheckout}
+              className="custom-outline-btn bg-primary/10 border-primary hover:bg-primary lg:mt-0 mt-2"
+            >
+              Proceed to Checkout
+            </button>
+          </div>
         </div>
 
         <div className="space-y-5">

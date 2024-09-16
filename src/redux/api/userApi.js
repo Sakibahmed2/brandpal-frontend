@@ -7,12 +7,25 @@ const userApi = baseApi.injectEndpoints({
         url: "/user",
       }),
     }),
+
     getSingleUser: builder.query({
       query: (id) => ({
         url: `/user/${id}`,
       }),
     }),
+
+    claimOffer: builder.mutation({
+      query: ({ userId, offerName }) => ({
+        url: `/user/claim-offer/${userId}`,
+        method: "PUT",
+        body: { offerName },
+      }),
+    }),
   }),
 });
 
-export const { useGetAllUserQuery, useGetSingleUserQuery } = userApi;
+export const {
+  useGetAllUserQuery,
+  useGetSingleUserQuery,
+  useClaimOfferMutation,
+} = userApi;

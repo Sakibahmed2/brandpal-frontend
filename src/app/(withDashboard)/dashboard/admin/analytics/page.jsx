@@ -1,5 +1,3 @@
-"use client";
-
 import AnalyticsCard from "@/components/ui/AnalyticsCard";
 import SalesReportsChart from "@/components/ui/SalesReportsChart";
 

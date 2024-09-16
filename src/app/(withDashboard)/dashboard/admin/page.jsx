@@ -1,43 +1,19 @@
 "use client";
 
-import ChartSection from "@/components/dashboard/DashboardHome/ChartSection/ChartSection";
+import dynamic from "next/dynamic";
 import OverviewSection from "@/components/dashboard/DashboardHome/OverviewSection/OverviewSection";
 import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetAllTransactionsQuery } from "@/redux/api/paymentApi";
 import Link from "next/link";
 
-const transactionsData = [
+// Dynamically import ChartSection to avoid SSR issues
+const ChartSection = dynamic(
+  () =>
+    import("@/components/dashboard/DashboardHome/ChartSection/ChartSection"),
   {
-    id: 1,
-    title: "Balance Top Up",
-    date: "March, 20 2022",
-    amount: 200,
-  },
-  {
-    id: 2,
-    title: "Pay Rent",
-    date: "March, 15 2022",
-    amount: 100,
-  },
-  {
-    id: 3,
-    title: "Office Rent",
-    date: "March, 12 2022",
-    amount: 500,
-  },
-  {
-    id: 4,
-    title: "Electricity",
-    date: "March, 12 2022",
-    amount: 80,
-  },
-  {
-    id: 5,
-    title: "Food & Drink",
-    date: "March, 11 2022",
-    amount: 12,
-  },
-];
+    ssr: false,
+  }
+);
 
 const DashboardHomePage = () => {
   const { data, isLoading } = useGetAllTransactionsQuery({});
@@ -45,11 +21,11 @@ const DashboardHomePage = () => {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <div className=" mt-0 lg:mt-5">
+    <div className="mt-0 lg:mt-5">
       <OverviewSection />
 
       {/* customer chart */}
-      <div className="mt-4  lg:flex ">
+      <div className="mt-4 lg:flex">
         <ChartSection />
 
         <div className="dark:bg-gray-900 bg-gray-50 p-5 mx-4 lg:mx-0 lg:w-[280px] lg:ml-4 mt-4 lg:mt-0">

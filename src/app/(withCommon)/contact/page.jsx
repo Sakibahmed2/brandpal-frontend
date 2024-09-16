@@ -1,8 +1,37 @@
+"use client";
+
 import Container from "@/components/ui/Container";
-import { LocateIcon, Mail, MapPin, Phone } from "lucide-react";
-import React from "react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { toast } from "sonner";
 
 const ContactPage = () => {
+  const handleSendMessage = async (e) => {
+    const toastId = toast.loading("Sending message...");
+    e.preventDefault();
+    const form = e.target;
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    try {
+      const res = await fetch("http://localhost:5000/api/v1/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const data = await res.json();
+
+      if (data?.success) {
+        toast.success("Message sent successfully", { id: toastId });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Container className="pt-20 lg:pt-32 pb-20">
       <div className="w-full lg:flex justify-between items-center gap-5">
@@ -51,7 +80,10 @@ const ContactPage = () => {
         </div>
 
         <div className="lg:w-1/2 mt-12 lg:mt-0">
-          <form className="max-w-lg mx-auto p-6 bg-base-100 shadow-lg rounded-lg">
+          <form
+            onSubmit={handleSendMessage}
+            className="max-w-lg mx-auto p-6 bg-base-100 shadow-lg rounded-lg"
+          >
             <h2 className="text-2xl font-semibold mb-6 text-primary">
               Contact Us
             </h2>
@@ -63,6 +95,7 @@ const ContactPage = () => {
               <input
                 type="text"
                 placeholder="Enter your name"
+                name="name"
                 className="input input-bordered w-full"
               />
             </div>
@@ -74,6 +107,7 @@ const ContactPage = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
+                name="email"
                 className="input input-bordered w-full"
               />
             </div>
@@ -84,12 +118,13 @@ const ContactPage = () => {
               </label>
               <textarea
                 className="textarea textarea-bordered h-32 w-full"
+                name="message"
                 placeholder="Type your message here"
               ></textarea>
             </div>
 
             <div className="form-control mt-6">
-              <button className="custom-secondary-btn py-3">
+              <button type="submit" className="custom-secondary-btn py-3">
                 Send Message
               </button>
             </div>

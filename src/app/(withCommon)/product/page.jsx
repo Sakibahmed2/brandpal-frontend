@@ -4,12 +4,13 @@ import React from "react";
 import ourProductHeader from "@/assets/images/our-product-image.jpg";
 import ServicesCard from "@/components/ui/ServicesCard";
 
+import seo from "@/assets/icons/SEO.svg";
 import socialMediaMarketing from "@/assets/icons/social-media-marketing.svg";
 import emailMarketing from "@/assets/icons/email-marketing.svg";
-import seo from "@/assets/icons/SEo.svg";
 import payPerClick from "@/assets/icons/pay-per-click.svg";
 import contentWriting from "@/assets/icons/content-writing.svg";
 import webDevelopment from "@/assets/icons/web-development.svg";
+import Link from "next/link";
 
 const services = [
   {
@@ -111,7 +112,9 @@ const OurProductPage = () => {
                 There are many variations of lorem spassages of Lorem Ipsum
                 available internet tend to repeat.
               </p>
-              <button className="custom-primary-btn py-3">Contact now</button>
+              <Link href={"/contact"}>
+                <button className="custom-primary-btn py-3">Contact now</button>
+              </Link>
             </div>
 
             <div>
@@ -122,7 +125,11 @@ const OurProductPage = () => {
                 There are many variations of lorem spassages of Lorem Ipsum
                 available internet tend to repeat.
               </p>
-              <button className="custom-primary-btn py-3">Contact now</button>
+              <Link href={"/contact"}>
+                <button className="custom-outline-btn bg-primary/10 border-primary hover:bg-primary py-3">
+                  Contact now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -141,7 +148,34 @@ const OurProductPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {services.map((service) => (
-            <ServicesCard key={service.id} service={service} />
+            <div
+              key={service.id}
+              className="rounded-md bg-base-100 shadow-sm hover:shadow-lg transition-shadow duration-300 border"
+            >
+              <div className="card-body">
+                <div className="mx-auto lg:mx-0 mb-3 p-2 rounded-md w-20 flex justify-center items-center bg-secondary/10">
+                  <Image
+                    src={service.icon}
+                    width={60}
+                    height={60}
+                    alt="service icon"
+                    className="w-12"
+                    unoptimized
+                  />
+                </div>
+                <hr />
+
+                <h2 className="card-title text-secondary text-center">
+                  {service.name}
+                </h2>
+                <p className="text-gray-500">{service.description}</p>
+                <ul className="list-disc pl-5 mt-3 text-gray-400">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           ))}
         </div>
       </div>

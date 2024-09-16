@@ -7,10 +7,13 @@ import { usePathname } from "next/navigation";
 import cn from "@/libs/cn";
 import { getUserInfo } from "@/utils/getUserInfo";
 import AuthButton from "@/components/ui/AuthButton";
+import { ShoppingCart } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
+  const cartItem = useSelector((state) => state.orders.orders);
 
   const userInfo = getUserInfo();
   const userRole = userInfo?.role;
@@ -22,12 +25,16 @@ const Navbar = () => {
     { title: "Contact", path: "/contact" },
   ];
 
-  if (userRole === "user") {
-    navItems.push({ title: "Cart", path: "/cart" });
-  }
-
   if (userRole === "admin" || userRole === "user") {
     navItems.push({ title: "Dashboard", path: `/dashboard/${userRole}` });
+  }
+
+  if (userRole === "user") {
+    navItems.push({
+      title: "Cart",
+      path: "/cart",
+      badge: cartItem.length ? cartItem.length : "0",
+    });
   }
 
   const pathname = usePathname();
@@ -67,14 +74,26 @@ const Navbar = () => {
           <div className="hidden lg:flex space-x-10">
             {navItems.map((item, index) => (
               <Link key={index} href={item.path}>
-                <p
-                  className={cn(
-                    "hover:text-orange-500 transition-all ease-in-out cursor-pointer",
-                    pathname === item.path && "text-orange-500"
+                <>
+                  {!item.badge && (
+                    <p
+                      className={cn(
+                        "hover:text-orange-500 transition-all ease-in-out cursor-pointer",
+                        pathname === item.path && "text-orange-500"
+                      )}
+                    >
+                      {item.title}
+                    </p>
                   )}
-                >
-                  {item.title}
-                </p>
+                  {item.badge && (
+                    <div className="relative">
+                      <ShoppingCart size={24} />
+                      <span className="absolute -top-2 -right-2 bg-secondary text-white rounded-full w-5 h-5 flex justify-center items-center">
+                        {item.badge}
+                      </span>
+                    </div>
+                  )}
+                </>
               </Link>
             ))}
           </div>

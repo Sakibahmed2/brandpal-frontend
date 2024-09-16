@@ -12,7 +12,10 @@ const serviceApi = baseApi.injectEndpoints({
     }),
 
     getAllServices: builder.query({
-      query: () => `/services`,
+      query: ({ userId }) => ({
+        url: `/services`,
+        params: userId && { userId },
+      }),
       providesTags: ["service"],
     }),
 

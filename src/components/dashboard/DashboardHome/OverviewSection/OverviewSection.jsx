@@ -1,3 +1,5 @@
+"use client";
+
 import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import { getUserInfo } from "@/utils/getUserInfo";

@@ -67,7 +67,7 @@ const UserDashboardPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.data.map((transaction, index) => (
+                  {data?.data?.map((transaction, index) => (
                     <tr
                       key={index}
                       className="border-b dark:border-gray-600 bg-white dark:bg-gray-800"
