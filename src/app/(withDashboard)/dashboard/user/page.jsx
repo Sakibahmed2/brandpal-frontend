@@ -6,6 +6,7 @@ import { Bell, CircleUserRound, Mail } from "lucide-react";
 
 import LoadingPage from "@/components/ui/LoadingPage";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import cn from "@/libs/cn";
 
 const UserDashboardPage = () => {
   const userInfo = getUserInfo();
@@ -59,24 +60,30 @@ const UserDashboardPage = () => {
               <table className="min-w-full table-auto">
                 <thead>
                   <tr className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300">
+                    <th className="px-4 py-2 text-left">Date</th>
                     <th className="px-4 py-2 text-left">Service Name</th>
                     <th className="px-4 py-2 text-left">Transaction ID</th>
                     <th className="px-4 py-2 text-left">Status</th>
-                    <th className="px-4 py-2 text-left">Date</th>
                     <th className="px-4 py-2 text-left">Price</th>
+                    <th className="px-4 py-2 text-left">Offer</th>
                   </tr>
                 </thead>
                 <tbody>
                   {data?.data?.map((transaction, index) => (
                     <tr
                       key={index}
-                      className="border-b dark:border-gray-600 bg-white dark:bg-gray-800"
+                      className="border-b dark:border-gray-600 bg-white dark:bg-gray-800 "
                     >
+                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
+                        {new Date(transaction.date).toLocaleDateString()}
+                      </td>
                       <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
                         {transaction.serviceName.join(" || ")}
                       </td>
-                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
-                        {transaction.transactionId}
+                      <td className="px-4 py-2">
+                        <p className=" text-gray-700 dark:text-gray-300">
+                          {transaction.transactionId}
+                        </p>
                       </td>
                       <td
                         className={`px-4 py-2 ${
@@ -87,11 +94,23 @@ const UserDashboardPage = () => {
                       >
                         {transaction.status}
                       </td>
-                      <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
-                        {new Date(transaction.date).toLocaleDateString()}
-                      </td>
+
                       <td className="px-4 py-2 text-gray-700 dark:text-gray-300">
                         ${transaction.price}
+                      </td>
+                      <td className="px-4 py-2">
+                        <p
+                          className={cn(
+                            "badge w-20",
+                            transaction.offer === "40%-off"
+                              ? "badge-success text-white"
+                              : transaction.offer === "free-trial"
+                              ? "badge-info"
+                              : "badge-error"
+                          )}
+                        >
+                          {transaction.offer}
+                        </p>
                       </td>
                     </tr>
                   ))}

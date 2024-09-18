@@ -13,7 +13,7 @@ const Providers = ({ children }) => {
         <ThemeProvider attribute="class">
           {children}
 
-          <Toaster richColors position="top-right" />
+          <Toaster richColors position="bottom-right" />
         </ThemeProvider>
       </PersistGate>
     </Provider>

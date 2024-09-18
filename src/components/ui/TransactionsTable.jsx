@@ -7,6 +7,7 @@ import {
   useUpdateToSuccessMutation,
 } from "@/redux/api/paymentApi";
 import Swal from "sweetalert2";
+import cn from "@/libs/cn";
 
 const TransactionsTable = () => {
   const { data, isLoading, refetch } = useGetAllTransactionsQuery({});
@@ -46,6 +47,7 @@ const TransactionsTable = () => {
               <th className="dark:text-gray-400">Amount</th>
               <th className="dark:text-gray-400">Status</th>
               <th className="dark:text-gray-400">Transaction ID</th>
+              <th className="dark:text-gray-400">Offer</th>
             </tr>
           </thead>
           <tbody>
@@ -60,16 +62,37 @@ const TransactionsTable = () => {
                 <td className="px-4 py-2">
                   <span
                     onClick={() => handleUpdateToSuccess(billing._id)}
-                    className={`badge cursor-pointer ${
+                    className={cn(
+                      `badge cursor-pointer `,
                       billing.status === "success"
                         ? "badge-success"
                         : "badge-error"
-                    }`}
+                    )}
                   >
                     {billing.status}
                   </span>
                 </td>
-                <td className="px-4 py-2">{billing.transactionId}</td>
+                <td className="px-4 py-2">
+                  <td className="px-4 py-2">
+                    <p className=" text-gray-700 dark:text-gray-300">
+                      {billing.transactionId}
+                    </p>
+                  </td>
+                </td>
+                <td className="px-4 py-2 ">
+                  <p
+                    className={cn(
+                      "badge ",
+                      billing.offer === "40%-off"
+                        ? "badge-success"
+                        : billing.offer === "free-trial"
+                        ? "badge-info"
+                        : "badge-error"
+                    )}
+                  >
+                    {billing.offer}
+                  </p>
+                </td>
               </tr>
             ))}
           </tbody>

@@ -2,6 +2,10 @@
 
 import cn from "@/libs/cn";
 import {
+  useConfirmPaymentMutation,
+  useGetSingleTransactionQuery,
+} from "@/redux/api/paymentApi";
+import {
   useClaimOfferMutation,
   useGetSingleUserQuery,
 } from "@/redux/api/userApi";
@@ -20,6 +24,10 @@ const ServicesCard = ({ service }) => {
   const userInfo = getUserInfo();
   const { data } = useGetSingleUserQuery(userInfo?.id);
   const [claimOffer] = useClaimOfferMutation();
+  const [confirmPayment] = useConfirmPaymentMutation();
+  const { data: userTransactions } = useGetSingleTransactionQuery({
+    email: userInfo?.email,
+  });
 
   const userDetails = data?.data;
 
@@ -33,12 +41,54 @@ const ServicesCard = ({ service }) => {
       const order = {
         serviceId: service._id,
         name: service.name,
-        price: service?.offerPrice ? service.offerPrice : service.price,
+        price:
+          userDetails?.offer === "free-trial"
+            ? 0
+            : service?.offerPrice
+            ? service.offerPrice
+            : service.price,
         time: service.duration,
         description: service.description,
+        offer: userDetails?.offer,
       };
       dispatch(addOrder(order));
       toast.success("Service added to cart");
+    }
+  };
+
+  const handleFreeTrail = async () => {
+    const toastId = toast.loading("Processing free trial...");
+
+    const isUserHaveFreeTrial = userTransactions?.data?.find(
+      (item) => item.offer === "free-trial"
+    );
+
+    if (isUserHaveFreeTrial?.offer === "free-trial") {
+      return toast.error("You already claim a service with free trail offer", {
+        id: toastId,
+      });
+    }
+
+    // save the payment in database
+    const payment = {
+      transactionId: "N/A",
+      email: userInfo.email,
+      price: 0,
+      date: new Date(),
+      serviceName: service.name,
+      serviceId: service._id,
+      status: "pending",
+      offer: "free-trial",
+    };
+
+    try {
+      const res = await confirmPayment(payment).unwrap();
+      console.log(res);
+      if (res.success) {
+        toast.success("Free trial activated", { id: toastId });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -135,12 +185,21 @@ const ServicesCard = ({ service }) => {
           )}
         </div>
 
-        <button
-          onClick={handleAddOrder}
-          className="custom-outline-btn bg-secondary/5 border-secondary hover:bg-secondary mt-4"
-        >
-          Buy service
-        </button>
+        {userDetails?.offer === "free-trial" ? (
+          <button
+            onClick={handleFreeTrail}
+            className="custom-outline-btn bg-secondary/5 border-secondary hover:bg-secondary mt-4"
+          >
+            Try it free
+          </button>
+        ) : (
+          <button
+            onClick={handleAddOrder}
+            className="custom-outline-btn bg-secondary/5 border-secondary hover:bg-secondary mt-4"
+          >
+            Buy service
+          </button>
+        )}
       </div>
     </div>
   );

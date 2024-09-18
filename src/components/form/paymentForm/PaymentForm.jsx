@@ -89,6 +89,9 @@ const PaymentForm = () => {
           date: new Date(),
           serviceName: myOrder.map((item) => item.name),
           serviceId: myOrder.map((item) => item.serviceId),
+          offer: myOrder.find((item) => item.offer === "40%-off")
+            ? "40%-off"
+            : "none",
           status: "pending",
         };
 
