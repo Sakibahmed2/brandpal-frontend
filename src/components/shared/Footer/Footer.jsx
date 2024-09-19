@@ -68,7 +68,7 @@ const Footer = () => {
             <div>
               <p className="text-xl text-secondary font-semibold">Contact Us</p>
               <div className="text-gray-400 mt-5 md:mt-10 space-y-4">
-                <p>marketek@gmail.com</p>
+                <p>support@devgenius.app</p>
                 <p>+62 1234 8765 223</p>
                 <p>2301 Jl. Suku saki, Cijalingan 6666</p>
               </div>

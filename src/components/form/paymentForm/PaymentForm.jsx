@@ -23,7 +23,7 @@ const PaymentForm = () => {
   const totalPrice = myOrder.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/payment/create-payment", {
+    fetch("https://brandpal-backend.vercel.app/api/v1/payment/create-payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

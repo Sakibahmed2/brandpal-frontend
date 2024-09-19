@@ -15,13 +15,16 @@ const ContactPage = () => {
     const message = form.message.value;
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
+      const res = await fetch(
+        "https://brandpal-backend.vercel.app/api/v1/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, message }),
+        }
+      );
       const data = await res.json();
 
       if (data?.success) {
@@ -51,7 +54,7 @@ const ContactPage = () => {
               </p>
               <div>
                 <p className="light-text">Phone Number</p>
-                <p className="lg:text-xl">123-456-789</p>
+                <p className="lg:text-xl">+447460611130</p>
               </div>
             </div>
 
@@ -61,7 +64,7 @@ const ContactPage = () => {
               </p>
               <div>
                 <p className="light-text">Email</p>
-                <p className="lg:text-xl">email@gmail.com</p>
+                <p className="lg:text-xl">support@devgenius.app</p>
               </div>
             </div>
 
@@ -72,7 +75,8 @@ const ContactPage = () => {
               <div>
                 <p className="light-text">Address</p>
                 <p className="lg:text-xl">
-                  1234 Elm Street, Springfield, IL 62704
+                  182-184 High Street North, East Ham, London, United Kingdom,
+                  E6 2JA
                 </p>
               </div>
             </div>
